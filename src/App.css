@@ -1,0 +1,267 @@
+.Signup{
+    display: grid;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.7rem;
+    margin-top: 10svh;
+    text-align: left;
+    background-color:  rgba(231, 185, 142, 0.847);
+    padding: 3%;
+    border-radius: 1rem;
+
+}
+.Signin{
+    display: grid;
+    max-width: 20rem;
+    margin-left: auto;
+    margin-right: auto;
+    gap: 0.7rem;
+    margin-top: 20svh;
+    text-align: justify;
+    background-color: rgba(231, 185, 142, 0.847);
+    padding: 3%;
+    border-radius: 1rem;
+    input{
+        height: 3rem;
+    }
+}
+.form-item
+{       
+        display: inline-block;
+        position: relative;
+        height: 3rem;
+        border-radius: 0.4rem;
+        border:none;
+        text-align: left;
+        font-weight: 100;
+        font-size: medium;
+        text-indent: 0.2rem;
+        button{
+            position: absolute; 
+            top: 50%; 
+            right: 10px; 
+            transform: translateY(-50%); 
+            border: none; 
+            background: none; 
+            cursor: pointer; 
+        }
+        input{
+            display: inline-block;
+            position: relative;
+            height: 3rem;
+            border-radius: 0.4rem;
+            border:none;
+            text-align: left;
+            font-weight: 100;
+            font-size: medium;
+            text-indent: 0.2rem;
+            padding-right: 39%;
+            margin-left: -1%;
+            
+        }
+}
+.submit-button{
+        margin-top: 3svh;
+        height: 3rem;
+        border-radius: 0.4rem;
+        border: none;
+        font-size: larger;
+        background-color: rgb(217, 105, 13);
+        color: aliceblue;
+        box-shadow: 2px 2px 2px rgba(88, 71, 96, 0.836);
+        transition: background-color 0.2s ease-in;
+}
+.submit-button:hover{
+    background-color: rgb(237, 170, 27);
+    cursor: pointer;
+}
+
+.Navbar{
+    display: flex;
+    align-items: center;
+    background-color: orange;
+    margin: 0;
+    padding: 2svh;
+    width: 100%;
+    border-radius: 10px;
+}
+
+@media(min-width:400px)
+{
+    .Nav-items{
+        margin-inline-start: 30%;
+        a{
+            margin-inline-start: 20%;
+            
+        }
+    }
+    
+}
+@media(min-width:650px)
+{
+    .Nav-items{
+        margin-inline-start: 50%;
+        a{
+            margin-inline-start: 20%;
+        }
+    }
+}
+@media(min-width:1200px)
+{
+    .Nav-items{
+        margin-inline-start: 60%;
+        a{
+            margin-inline-start: 30%;
+        }
+    }
+}
+
+.Login{
+    margin-left: 15rem;
+    text-decoration: none;
+    color: black;
+}
+.Home-text{
+    font-size: 1.5cm;
+    padding: 0% 40% 0% 10%;
+    span{
+        color: rgb(214, 130, 13);
+    }
+}
+.start-chatting-button
+{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: large;
+    margin: 0% 0% 0% 10%;
+    padding: 20px 2% 20px 2%;
+    background-color: rgb(217, 105, 13);
+    border-radius: 10px;
+    box-shadow: 2px -2px 2px rgb(107, 71, 3);
+    transition: background-color 0.1s ease-in;
+}
+.start-chatting-button:hover
+{
+    background-color: rgb(230, 187, 18);
+}
+.Footer-text{
+    
+    font-size: 0.8cm;
+    padding: 5% 20% 0% 20%;
+    span{
+        color: rgb(214, 130, 13);
+    }
+}
+.Footer{
+    margin-top: 10svh;
+    text-align: center;
+}
+.Line
+{
+    border-top: 2px solid rgb(224, 81, 15);
+    width: 100%; 
+    margin: 20px 0;
+}
+.links{
+    display: block;
+    float: right;
+    margin-top: 10%;
+    margin-bottom: 2%;
+    a{
+        margin-right: 10px;
+    }
+}
+.isActive{
+    color: rgb(255, 254, 252);
+    font-size: larger;
+    font-weight: bolder;
+    text-decoration: none;
+}
+.isInActive{
+        text-decoration: none;
+        color: rgb(112, 110, 110);
+        font-size: larger;
+        font-weight: bolder;
+        transition: color 0.2s ease-in;
+}
+.isInActive:hover{
+    color: rgb(251, 247, 247);
+}
+.contacts{
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+    border-bottom: 1px solid rgb(201, 200, 200);
+    margin-right: -8svw;
+    padding-bottom: 1rem;
+    img{
+        margin-left: 2svw;
+        border: 1px solid rgb(239, 122, 12);
+        border-radius: 100%;
+        
+    }
+    div{
+        margin-left: 2svw;
+    }
+}
+.chatsidebar{
+    margin-top: 2svh;
+    background-color: aliceblue;
+    padding-right: 8svw;
+    border-radius: 10px;
+    height: 78svh;
+    width: 100%;
+    overflow: auto;
+}
+.chatsidebar::-webkit-scrollbar{
+    display: none;
+}
+.main-chat-div{
+    display: flex;
+    overflow: hidden;
+    
+}
+.user-logo{
+    display: flex;
+    align-items: center;
+    margin-top: 3svh;
+    margin-left: 2svw;
+    img{
+        border-radius: 100%;
+        border: 1px solid rgb(255, 69, 0);
+    }
+    div{
+        margin-left: 2svw;
+    }
+}
+.search-box{
+    display: flex;
+    background-color: rgba(158, 155, 155, 0.389);
+    padding-left: 1svw;
+    margin-left: 3svw;
+    margin-right: -6svw;
+    margin-top: 2svh;
+    height: 1.7rem;
+    border-radius: 10px;
+    input{
+        border: none;
+        width: 100%;
+        font-size: medium;
+        background-color: transparent;
+    }
+    input:focus
+    {
+        outline: none;
+    }
+    img{
+        cursor: pointer;
+    }
+}
+.main-chat{
+    background-color: aliceblue;
+    margin-left: 2svw;
+    margin-top: 2svh;
+    border-radius: 10px;
+    padding-left:70svw;
+}
