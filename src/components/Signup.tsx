@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Loading from './Loading';
 
 interface signupformelements{
     name ?:string,
@@ -7,6 +8,12 @@ interface signupformelements{
     confirmpassword?:string
 }
 const Signup = () => {
+    const [loading, setLoading] = useState(true);
+    useEffect(() => {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500); 
+    }, []);
     const [userdata,setuserdata]=useState<signupformelements>({});
     const [showpassword,setshowpassword]=useState(false);
     const handleEye=(e:React.MouseEvent<HTMLButtonElement>)=>{
@@ -51,7 +58,8 @@ const Signup = () => {
         console.log(userdata)
     }
   return (
-    <div>
+    <>
+    {loading?(<Loading/>):(<div>
         <form className='Signup' onSubmit={handleSubmit}>
             Username
             <input placeholder='Your username' className='form-item' type='text' onChange={(e)=>{
@@ -78,7 +86,8 @@ const Signup = () => {
             <button className='submit-button' type="submit">Sign Up</button>
             <span>Already have an account?<a href="/sign-in">Login</a></span>
         </form>
-    </div>
+    </div>)}
+    </>
   )
 }
 

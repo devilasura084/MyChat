@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 
 const About = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); 
+  }, []);
   return (
-    <div>About</div>
+    <>
+    {loading?(<Loading/>):
+    (<div>About</div>)}
+    </>
   )
 }
 

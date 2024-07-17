@@ -1,8 +1,18 @@
+import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 
 const Contact = () => {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 500); 
+  }, []);
   return (
-    <div>Contact</div>
+    <>
+    {loading?(<Loading/>):(<div>Contact</div>)}
+    </>
   )
 }
 
