@@ -1,4 +1,4 @@
-import React from 'react'
+
 import ContactList from './ContactList'
 import {contactlist} from '../Demodata'
 interface UserDataType{

@@ -1,4 +1,4 @@
-import React from 'react'
+
 interface contacts{
     name:string,
     email:string,
