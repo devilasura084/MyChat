@@ -1,12 +1,23 @@
-import { Suspense } from "react";
+import { useState } from "react";
 import Loading from "../components/Loading";
 
+type AboutProps = {
+  delay: number;
+};
 
-const About = () => {
+const About = ({delay}:AboutProps) => {
+  const [loading, setLoading] = useState(true);
+  if(loading)
+  {
+    return (<Loading
+    delay={delay}
+    setLoading={setLoading}
+    />)
+  }
   return (
-    <Suspense fallback={<Loading/>}>
+    <div>
       About
-    </Suspense>
+    </div>
   )
 }
 

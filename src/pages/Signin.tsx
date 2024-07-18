@@ -1,12 +1,23 @@
-import React, { Suspense, useState } from 'react'
+import React, { useState } from 'react'
 import Loading from '../components/Loading';
+type SigninProps = {
+    delay: number;
+  };
 interface signinformelements{
     name ?:string,
     password?:string,
 }
-const Signin = () => {
+const Signin = ({delay}:SigninProps) => {
     const [userdata,setuserdata]=useState<signinformelements>({});
     const [showpassword,setshowpassword]=useState(false);
+    const [loading, setLoading] = useState(true);
+    if(loading)
+    {
+      return (<Loading
+      delay={delay}
+      setLoading={setLoading}
+      />)
+    }
     const handleEye=(e:React.MouseEvent<HTMLImageElement>)=>{
         e.preventDefault();
         setshowpassword(!showpassword);
@@ -33,7 +44,6 @@ const Signin = () => {
         console.log(userdata)
     }
   return (
-    <Suspense fallback={<Loading/>}>
     <div className='Main-form'>
         
         <form className='Signin' onSubmit={handleSubmit}>
@@ -53,8 +63,6 @@ const Signin = () => {
             <span>Don't have an account?<a href="/sign-up">Register</a></span>
         </form>
     </div>
-    </Suspense>
-    
   )
 }
 
