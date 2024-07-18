@@ -1,17 +1,21 @@
 
+
 interface contacts{
     name:string,
     email:string,
     imageUrl:string
 }
 interface contactlistprops{
+    setPosition: React.Dispatch<React.SetStateAction<number | undefined>>;
     contacts:contacts[];
 }
-const ContactList = ({contacts}:contactlistprops) => {
+const ContactList = ({setPosition,contacts}:contactlistprops) => {
+    const handleClick=(key:number|undefined)=>{
+    setPosition(key);}
   return (
     <div>
         {contacts.map((contact,index)=>(
-            <div className='contacts' key={index}>
+            <div onClick={()=>handleClick(index)} className='contacts' key={index}>
                 <img src={contact.imageUrl} alt={`${contact.name}'s avatar`}/>
                 <div>{contact.name}</div>
             </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Loading from './Loading';
+import Loading from '../components/Loading';
 interface signinformelements{
     name ?:string,
     password?:string,
@@ -13,7 +13,7 @@ const Signin = () => {
     }, []);
     const [userdata,setuserdata]=useState<signinformelements>({});
     const [showpassword,setshowpassword]=useState(false);
-    const handleEye=(e:React.MouseEvent<HTMLButtonElement>)=>{
+    const handleEye=(e:React.MouseEvent<HTMLImageElement>)=>{
         e.preventDefault();
         setshowpassword(!showpassword);
     }
@@ -48,12 +48,12 @@ const Signin = () => {
                 setuserdata({...userdata,name:e.target.value});
             }} />
             Password
-            <div className='form-item'>
+            <div className='password-showpassword'>
             <input placeholder='password'  type={showpassword?"text":"password"}
             onChange={(e)=>{
                 setuserdata({...userdata,password:e.target.value});
             }}/>
-            <button onClick={handleEye}><img src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE" style={{width:20}} /></button>
+            <img className='password-eye' onClick={handleEye} src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE" style={{width:20}} />
             </div>
             <button className='submit-button' type="submit">Sign In</button>
             <span>Don't have an account?<a href="/sign-up">Register</a></span>

@@ -5,22 +5,24 @@ interface UserDataType{
   name:string
   imageUrl:string
 }
-interface UserDataTypeProps{
-  userdata:UserDataType;
+interface ChatsidebarProps {
+  userdata: UserDataType;
+  setPosition: React.Dispatch<React.SetStateAction<number | undefined>>;
 }
 
-const Chatsidebar = (userdata:UserDataTypeProps) => {
+const Chatsidebar = ({ userdata, setPosition }:ChatsidebarProps) => {
   return (
     <div className='chatsidebar'>
         <div className='user-logo'>
-          <img src={userdata.userdata.imageUrl} alt={`${userdata.userdata.name}'s avatar`} />
-          <div>{userdata.userdata.name}</div>
+          <img src={userdata.imageUrl} alt={`${userdata.name}'s avatar`} />
+          <div>{userdata.name}</div>
         </div>
         <div className='search-box'>
           <img src="Search.svg" alt="search icon" />
           <input type="text" />
         </div>
         <ContactList
+        setPosition={setPosition}
         contacts={contactlist}
         />
     </div>

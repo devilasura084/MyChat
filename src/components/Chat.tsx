@@ -7,6 +7,7 @@ import Loading from './Loading';
 
 const Chat = () => {
   const [loading, setLoading] = useState(true);
+  const [position,setPosition] =useState<number|undefined>();
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
@@ -22,8 +23,11 @@ const Chat = () => {
         <div className='main-chat-div'>
         <Chatsidebar
         userdata={userdata}
+        setPosition={setPosition}
         />
-        <MainChat/>
+        <MainChat
+        position={position}
+        />
       </div>
       )}
     </div>

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 
-const About = () => {
+const Contact = () => {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -11,10 +11,9 @@ const About = () => {
   }, []);
   return (
     <>
-    {loading?(<Loading/>):
-    (<div>About</div>)}
+    {loading?(<Loading/>):(<div>Contact</div>)}
     </>
   )
 }
 
-export default About
+export default Contact

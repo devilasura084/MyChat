@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 interface signupformelements{
     name ?:string,
@@ -16,7 +16,7 @@ const Signup = () => {
     }, []);
     const [userdata,setuserdata]=useState<signupformelements>({});
     const [showpassword,setshowpassword]=useState(false);
-    const handleEye=(e:React.MouseEvent<HTMLButtonElement>)=>{
+    const handleEye=(e:React.MouseEvent<HTMLImageElement>)=>{
         e.preventDefault();
         setshowpassword(!showpassword);
     }
@@ -71,12 +71,12 @@ const Signup = () => {
                 setuserdata({...userdata,email:e.target.value});
             }}/>
             Password
-            <div className='form-item'>
-            <input  placeholder='password'  type={showpassword?"text":"password"}
+            <div className='password-showpassword'>
+            <input placeholder='password'  type={showpassword?"text":"password"}
             onChange={(e)=>{
                 setuserdata({...userdata,password:e.target.value});
             }}/>
-            <button onClick={handleEye}><img src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE" style={{width:20}} /></button>
+            <img className='password-eye' onClick={handleEye} src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE" style={{width:20}} />
             </div>
             Confirm password
             <input placeholder='Confirm password' className='form-item' type="password"
