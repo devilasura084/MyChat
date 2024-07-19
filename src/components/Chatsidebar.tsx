@@ -22,6 +22,10 @@ const Chatsidebar = ({ contactlist,userdata, setContactdetails }:ChatsidebarProp
         <div className='user-logo'>
           <img src={userdata.imageUrl} alt={`${userdata.name}'s avatar`} />
           <div>{userdata.name}</div>
+          <div className="icons">
+          <img src="/addaccount.svg" alt="addacc" />
+          <img src="/moreoption.svg" alt="moreoption" />
+          </div>
         </div>
         <div className='search-box'>
           <img src="Search.svg" alt="search icon" />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Loading from '../components/Loading';
+import { useNavigate } from 'react-router-dom';
 type SignupProps = {
     delay: number;
   };
@@ -10,6 +11,7 @@ interface signupformelements{
     confirmpassword?:string
 }
 const Signup = ({delay}:SignupProps) => {
+    const Navigate=useNavigate()
     const [userdata,setuserdata]=useState<signupformelements>({});
     const [showpassword,setshowpassword]=useState(false);
     const [loading, setLoading] = useState(true);
@@ -59,6 +61,7 @@ const Signup = ({delay}:SignupProps) => {
             {alert('password needs to have 8 character');
                 return
             }
+            Navigate('/sign-in');
         console.log(userdata)
     }
   return (

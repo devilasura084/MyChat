@@ -220,7 +220,7 @@
     background-color: aliceblue;
     padding-right: 8svw;
     border-radius: 10px;
-    height: 78svh;
+    max-height: 43rem;
     width: 20svw;
     overflow: auto;
 }
@@ -230,7 +230,8 @@
 .main-chat-div{
     display: flex;
     overflow: hidden;
-    
+    width: 100%;
+    height: 100%;
 }
 .user-logo{
     display: flex;
@@ -276,7 +277,7 @@
     text-align: left;
     width: 65svw;
     display: grid;
-    grid-template-rows: 15svh 52svh 10svh;
+    grid-template-rows: 7rem 32rem 4rem;
 }
 .loading-screen{
   position: fixed;
@@ -330,12 +331,16 @@
     background-color: aliceblue;
     border-radius: 0px 10px 10px 10px;
     display: flex;
+    justify-content: center;
     align-items: center;
+    box-sizing: border-box;
+    position: relative;
     input{
-        margin-left: 1svw;
+        width: calc(100% - 2vw); 
+        height: calc(100% - 2vh);
+        box-sizing: border-box;
+        margin: 1rem;
         border: 1px solid orangered;
-        width: 95%;
-        height: 70%;
         border-radius: 10rem;
         text-indent: 1rem;
         font-size: large;
@@ -386,4 +391,13 @@
       linear-gradient(#000 0 0) padding-box;
     background: linear-gradient(135deg,orangered,#ffa600) border-box;
     color: #fff;
+  }
+  .icons{
+    display: flex;
+    gap: 0.5svw;
+    position:relative;
+    transform: translateX(100%);
+    img{
+        border: none;
+    }
   }

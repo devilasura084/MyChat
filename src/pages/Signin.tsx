@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import Loading from '../components/Loading';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 type SigninProps = {
     delay: number;
   };
@@ -44,6 +46,8 @@ const Signin = ({delay}:SigninProps) => {
         console.log(userdata)
     }
   return (
+    <>
+    <Navbar/>
     <div className='Main-form'>
         
         <form className='Signin' onSubmit={handleSubmit}>
@@ -63,6 +67,8 @@ const Signin = ({delay}:SigninProps) => {
             <span>Don't have an account?<a href="/sign-up">Register</a></span>
         </form>
     </div>
+    <Footer/>
+    </>
   )
 }
 

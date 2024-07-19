@@ -1,5 +1,7 @@
 import { useState } from "react";
 import Loading from "../components/Loading";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 type ContactProps = {
   delay: number;
 };
@@ -14,9 +16,13 @@ const Contact = ({delay}:ContactProps) => {
     />)
   }
   return (
+    <>
+    <Navbar/>
     <div>
       Contact
     </div>
+    <Footer/>
+    </>
   )
 }
 
