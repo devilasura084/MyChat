@@ -1,20 +1,36 @@
 
-import {contactlist} from '../Demodata'
+
+import ChatBetweenPeople from './ChatBetweenPeople';
+import MainChatBar from './MainChatBar';
 import MainChatTitle from './MainChatTitle';
 interface mainchatprops{
-  position: number | undefined;
+  contactdetails: contacts | undefined;
+  messages:message[]
 }
-const MainChat = ({position}:mainchatprops) => {
-  if (position === undefined || position < 0 || position >= contactlist.length) {
+interface contacts{
+  name:string,
+  email:string,
+  imageUrl:string
+}
+interface message{
+      sender: string,
+      message: string,
+      timestamp: Date
+}
+const MainChat = ({messages,contactdetails}:mainchatprops) => {
+  if (contactdetails === undefined) {
     return <div className='main-chat'><div /></div>;
   }
-  const contact=contactlist[position];
   return (
     <div className='main-chat'>
       <MainChatTitle
-      contactname={contact.name}
-      contactimg={contact.imageUrl}
+      contactname={contactdetails.name}
+      contactimg={contactdetails.imageUrl}
       />
+      <ChatBetweenPeople
+      messages={messages}
+      />
+      <MainChatBar/>
     </div>
   )
 }

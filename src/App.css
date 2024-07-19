@@ -187,7 +187,7 @@
 }
 .isInActive{
         text-decoration: none;
-        color: rgb(112, 110, 110);
+        color: rgb(3, 3, 3);
         font-size: larger;
         font-weight: bolder;
         transition: color 0.2s ease-in;
@@ -275,7 +275,8 @@
     border-radius: 10px;
     text-align: left;
     width: 65svw;
-    display: flex;
+    display: grid;
+    grid-template-rows: 15svh 52svh 10svh;
 }
 .loading-screen{
   position: fixed;
@@ -302,11 +303,12 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
-  .chat-title{
+.chat-title{
     display: flex;
     width: 100%;
-    height: 15svh;
     background-color: rgb(255, 132, 0);
+    margin: 0;
+    padding: 0;
     img{
         width: 4rem;
         height: 4rem;
@@ -316,9 +318,71 @@
         border: 4px solid white;
     }
     div{
-        margin-top: 7svh;
+        margin-top: 6svh;
         margin-left: 3svw;
         color: white;
+        font-size: x-large;
     }
     border-radius: 10px 10px 0px 0px;
+  }
+  .main-chat-bar{
+    background-color: aliceblue;
+    border-radius: 0px 10px 10px 10px;
+    display: flex;
+    align-items: center;
+    input{
+        margin-left: 1svw;
+        border: 1px solid orangered;
+        width: 95%;
+        height: 70%;
+        border-radius: 10rem;
+        text-indent: 1rem;
+        font-size: large;
+    }
+    input:focus{
+        outline: none;
+    }
+  }
+  .chat-between-people{
+    background-color: rgb(203, 202, 202);
+    overflow: scroll;
+  }
+  .chat-between-people::-webkit-scrollbar{
+    display: none;
+  }
+  .bubble {
+    --r: 1.5rem;  /* the radius */
+    --t: 1em; /* the size of the tail */
+    
+    max-width: 300px;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    padding: 1em;
+    border-inline: var(--t) solid #0000;
+    border-radius: calc(var(--r) + var(--t))/var(--r);
+    font-size: large;
+  }
+  .left {
+    --_p: 0;
+    border-bottom-left-radius: 0 0;
+    place-self: start;
+    margin-right: auto;
+    mask: 
+      radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
+        var(--_p) 100%/var(--t) var(--t) no-repeat,
+      linear-gradient(#000 0 0) padding-box;
+    background: linear-gradient(135deg,aliceblue,aliceblue) border-box;
+    
+  }
+  .right {
+    --_p: 100%;
+    border-bottom-right-radius: 0 0;
+    place-self: end;
+    margin-left: auto;
+    mask: 
+      radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
+        var(--_p) 100%/var(--t) var(--t) no-repeat,
+      linear-gradient(#000 0 0) padding-box;
+    background: linear-gradient(135deg,orangered,#ffa600) border-box;
+    color: #fff;
   }

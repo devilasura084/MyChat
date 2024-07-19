@@ -3,12 +3,17 @@ import { useState } from 'react';
 import Chatsidebar from '../components/Chatsidebar'
 import MainChat from '../components/MainChat'
 import Loading from '../components/Loading';
+import {contactlist,messages} from '../Demodata';
 type ChatProps = {
   delay: number;
 };
-
+interface contacts{
+  name:string,
+  email:string,
+  imageUrl:string
+}
 const Chat = ({delay}:ChatProps) => {
-  const [position,setPosition] =useState<number|undefined>();
+  const [contactdetails,setContactdetails] =useState<contacts|undefined>();
   const [loading, setLoading] = useState(true);
   if(loading)
   {
@@ -24,11 +29,13 @@ const Chat = ({delay}:ChatProps) => {
   return (
         <div className='main-chat-div'>
         <Chatsidebar
+        contactlist={contactlist}
         userdata={userdata}
-        setPosition={setPosition}
+        setContactdetails={setContactdetails}
         />
         <MainChat
-        position={position}
+        contactdetails={contactdetails}
+        messages={messages}
         />
       </div>
   )

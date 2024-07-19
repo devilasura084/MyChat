@@ -1,16 +1,22 @@
 
 import ContactList from './ContactList'
-import {contactlist} from '../Demodata'
+
 interface UserDataType{
   name:string
   imageUrl:string
 }
+interface contacts{
+  name:string,
+  email:string,
+  imageUrl:string
+}
 interface ChatsidebarProps {
+  contactlist:contacts[]
   userdata: UserDataType;
-  setPosition: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setContactdetails: React.Dispatch<React.SetStateAction<contacts | undefined>>;
 }
 
-const Chatsidebar = ({ userdata, setPosition }:ChatsidebarProps) => {
+const Chatsidebar = ({ contactlist,userdata, setContactdetails }:ChatsidebarProps) => {
   return (
     <div className='chatsidebar'>
         <div className='user-logo'>
@@ -22,7 +28,7 @@ const Chatsidebar = ({ userdata, setPosition }:ChatsidebarProps) => {
           <input type="text" />
         </div>
         <ContactList
-        setPosition={setPosition}
+        setContactdetails={setContactdetails}
         contacts={contactlist}
         />
     </div>
