@@ -216,12 +216,11 @@
     cursor: pointer;
 }
 .chatsidebar{
-    margin-top: 2svh;
     background-color: aliceblue;
     padding-right: 8svw;
     border-radius: 10px;
-    max-height: 43rem;
-    width: 20svw;
+    max-height: 44.5rem;
+    width: 25svw;
     overflow: auto;
 }
 .chatsidebar::-webkit-scrollbar{
@@ -253,7 +252,7 @@
     margin-left: 3svw;
     margin-right: -6svw;
     margin-top: 2svh;
-    height: 1.7rem;
+    height: 2rem;
     border-radius: 10px;
     input{
         border: none;
@@ -271,11 +270,10 @@
 }
 .main-chat{
     background-color: aliceblue;
-    margin-left: 2svw;
-    margin-top: 2svh;
+    margin-left: 1svw;
     border-radius: 10px;
     text-align: left;
-    width: 65svw;
+    width: 70svw;
     display: grid;
     grid-template-rows: 7rem 32rem 4rem;
 }
@@ -394,9 +392,9 @@
   }
   .icons{
     display: flex;
-    gap: 0.5svw;
+    gap: 1svw;
     position:relative;
-    transform: translateX(100%);
+    transform: translateX(250%);
     img{
         border: none;
     }
