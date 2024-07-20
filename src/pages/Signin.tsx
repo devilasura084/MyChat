@@ -2,15 +2,20 @@ import React, { useState } from 'react'
 import Loading from '../components/Loading';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 type SigninProps = {
     delay: number;
   };
 interface signinformelements{
-    name ?:string,
+    email ?:string,
     password?:string,
 }
 const Signin = ({delay}:SigninProps) => {
+    const Navigate=useNavigate()
     const [userdata,setuserdata]=useState<signinformelements>({});
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [showpassword,setshowpassword]=useState(false);
     const [loading, setLoading] = useState(true);
     if(loading)
@@ -24,26 +29,46 @@ const Signin = ({delay}:SigninProps) => {
         e.preventDefault();
         setshowpassword(!showpassword);
     }
-    const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    const handleSubmit=async (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        if(userdata.name===undefined ||userdata.name?.trim()==="")
-            {alert("Name cannot be empty");
+        const {email,password}=userdata;
+        if(email===undefined ||email?.trim()==="")
+            {setErrorMessage("email cannot be empty");
                 return
             }
-        if(userdata.password===undefined ||userdata.password?.trim()==="")
-            {alert("password cannot be empty");
+        if(password===undefined ||password?.trim()==="")
+            {setErrorMessage("password cannot be empty");
                 return
             }
-        if(userdata.name !== undefined && userdata.name.length <=3 )
+        if(email !== undefined && !email.includes('@') )
         {
-            alert("name too short!! must contain more than three characters")
+            setErrorMessage("Email doesnt contain @")
             return
         }
-        if(userdata.password!==undefined && userdata.password.length<8)
-            {alert('password needs to have 8 character');
+        if(email !== undefined && !email.includes('.') )
+            {
+                setErrorMessage("Email doesnt contain .")
                 return
             }
-        console.log(userdata)
+        if(password!==undefined && password.length<8)
+            {setErrorMessage('password needs to have 8 character');
+                return
+            }
+            try{
+                await axios.post('http://localhost:5000/api/Sign-in',userdata);
+                console.log('logged in');
+                setErrorMessage('');
+                Navigate('/chat')
+            }
+            catch(err:any){
+                if(err.response && err.response.status===400)
+                    setErrorMessage(err.response.data.message);
+                else
+                {
+                    setErrorMessage("unforeseen error has occured")
+                }
+            }
+        
     }
   return (
     <>
@@ -51,9 +76,10 @@ const Signin = ({delay}:SigninProps) => {
     <div className='Main-form'>
         
         <form className='Signin' onSubmit={handleSubmit}>
-            Username
-            <input placeholder='Your username' className='form-item' type='text' onChange={(e)=>{
-                setuserdata({...userdata,name:e.target.value});
+        {errorMessage && <p style={{ color: 'red',margin:0,padding:0}}>{errorMessage}</p>}
+            Email
+            <input placeholder='your email' className='form-item' type='email' onChange={(e)=>{
+                setuserdata({...userdata,email:e.target.value});
             }} />
             Password
             <div className='password-showpassword'>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Loading from '../components/Loading';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 type SignupProps = {
     delay: number;
   };
@@ -13,6 +14,7 @@ interface signupformelements{
 const Signup = ({delay}:SignupProps) => {
     const Navigate=useNavigate()
     const [userdata,setuserdata]=useState<signupformelements>({});
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [showpassword,setshowpassword]=useState(false);
     const [loading, setLoading] = useState(true);
     if(loading)
@@ -26,47 +28,67 @@ const Signup = ({delay}:SignupProps) => {
         e.preventDefault();
         setshowpassword(!showpassword);
     }
-    const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+    const handleSubmit=async(e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
-        if(userdata.name===undefined ||userdata.name?.trim()==="")
-            {alert("Name cannot be empty");
+        const {name,email,password,confirmpassword}:signupformelements=userdata;
+        if(name===undefined ||name?.trim()==="")
+            {setErrorMessage("Name cannot be empty");
                 return
             }
-        if(userdata.email===undefined ||userdata.email?.trim()==="")
-           { alert("email cannot be empty");
+        if(email===undefined ||email?.trim()==="")
+           { setErrorMessage("email cannot be empty");
             return
            }
-        if(userdata.password===undefined ||userdata.password?.trim()==="")
-            {alert("password cannot be empty");
+        if(password===undefined ||password?.trim()==="")
+            {setErrorMessage("password cannot be empty");
                 return
             }
-        if(userdata.confirmpassword===undefined ||userdata.confirmpassword?.trim()==="")
-            {alert("confirmpassword cannot be empty");
+        if(confirmpassword===undefined ||confirmpassword?.trim()==="")
+            {setErrorMessage("confirmpassword cannot be empty");
                 return
             }
-        if(userdata.password !== userdata.confirmpassword )
-           {alert("password and confirmpassword do not match")
+        if(password !== confirmpassword )
+           {setErrorMessage("password and confirmpassword do not match")
             return
            }
-        if(userdata.name !== undefined && userdata.name.length <3 )
+        if(name !== undefined && name.length <3 )
         {
-            alert("name too short must contain more than three characters")
+            setErrorMessage("name too short must contain more than three characters")
             return
         }
-        if(userdata.email!== undefined && !userdata.email.includes("@") && !userdata.email.includes('.')){
-            alert("email not correct")
+        if(email!== undefined && !email.includes("@") && !email.includes('.')){
+            setErrorMessage("email not correct")
             return
         }
-        if(userdata.password!==undefined && userdata.password.length<8)
-            {alert('password needs to have 8 character');
+        if(password!==undefined && password.length<8)
+            {setErrorMessage('password needs to have 8 character');
                 return
             }
+        const user={
+            name:name,
+            email:email,
+            password:password,
+        }
+        try {
+             await axios.post('http://localhost:5000/api/Sign-up',user);
+            setErrorMessage('');
+            console.log('data sent');
             Navigate('/sign-in');
-        console.log(userdata)
+        } catch (error:any) {
+            if(error.response && error.response.status==400)
+                {setErrorMessage(error.response.data.message);
+                console.log(error.response.data.message);}
+            else{
+                setErrorMessage("unexpected error occurred");
+            }
+            return;
+        }
+        
     }
   return (
     <div>
         <form className='Signup' onSubmit={handleSubmit}>
+            {errorMessage && <p style={{ color: 'red',margin:0,padding:0 }}>{errorMessage}</p>}
             Username
             <input placeholder='Your username' className='form-item' type='text' onChange={(e)=>{
                 setuserdata({...userdata,name:e.target.value});
