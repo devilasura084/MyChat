@@ -4,11 +4,13 @@ const cors=require('cors');
 const mongoose=require('mongoose');
 const userModel=require('./models/User');
 const app=express();
-const port=5000;
+const jwt=require('jsonwebtoken')
+const authenticateJWT=require('./middleware/authMiddleware');
+require('dotenv').config();
 app.use(cors());
 app.use(bodyparser.json());
 
-mongoose.connect('mongodb://localhost:27017/');
+mongoose.connect(process.env.MONGO_URL);
 mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB');
   });
@@ -39,13 +41,17 @@ app.post('/api/Sign-in',async(req,res)=>{
             return res.status(400).json({ message: 'Email does not exist,please sign up' });
         if(existingUser.password!=password)
             return res.status(400).json({ message: 'Email or password is wrong!' });
-        res.status(200).send({message:'Succesfully logged in'});
+        const token=jwt.sign({email:req.body.email},'YOUR_SECRET_KEY');
+        res.json({token})
         console.log("succesfully logged in");
     }
     catch{
         res.status(500).send('Error saving data');
     }
 })
-app.listen(port,()=>{
-    console.log(`Server is running on port ${port}`)
+app.get('/chat',authenticateJWT,(req,res)=>{
+    res.send('This is protected route')
+})
+app.listen(process.env.PORT,()=>{
+    console.log(`Server is running on port ${process.env.PORT}`)
 });

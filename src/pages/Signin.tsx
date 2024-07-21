@@ -55,10 +55,16 @@ const Signin = ({delay}:SigninProps) => {
                 return
             }
             try{
-                await axios.post('http://localhost:5000/api/Sign-in',userdata);
-                console.log('logged in');
+                const response=await axios.post('http://localhost:5000/api/Sign-in',userdata);
                 setErrorMessage('');
-                Navigate('/chat')
+                const {token}=response.data;
+                if(token){
+                    localStorage.setItem('token',token);
+                    Navigate('/chat')
+                }
+                else {
+                    setErrorMessage('Login failed')
+                }
             }
             catch(err:any){
                 if(err.response && err.response.status===400)
