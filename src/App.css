@@ -94,36 +94,6 @@
     border-radius: 10px;
 }
 
-@media(min-width:400px)
-{
-    .Nav-items{
-        margin-inline-start: 30%;
-        a{
-            margin-inline-start: 20%;
-            
-        }
-    }
-    
-}
-@media(min-width:650px)
-{
-    .Nav-items{
-        margin-inline-start: 50%;
-        a{
-            margin-inline-start: 20%;
-        }
-    }
-}
-@media(min-width:1200px)
-{
-    .Nav-items{
-        margin-inline-start: 60%;
-        a{
-            margin-inline-start: 30%;
-        }
-    }
-}
-
 .Login{
     margin-left: 15rem;
     text-decoration: none;
@@ -179,6 +149,12 @@
         margin-right: 10px;
     }
 }
+.Nav-items{
+    display: flex;
+    gap: 5svw;
+    width: 80%;
+    justify-content: flex-end;
+}
 .isActive{
     color: rgb(255, 254, 252);
     font-size: larger;
@@ -191,6 +167,17 @@
         font-size: larger;
         font-weight: bolder;
         transition: color 0.2s ease-in;
+}
+.logout{
+    text-decoration: none;
+    color: rgb(3, 3, 3);
+    font-size: larger;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: color 0.2s ease-in;
+}
+.logout:hover{
+    color: white;
 }
 .isInActive:hover{
     color: rgb(251, 247, 247);

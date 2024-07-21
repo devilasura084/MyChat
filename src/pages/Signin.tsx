@@ -59,6 +59,7 @@ const Signin = ({delay}:SigninProps) => {
                 setErrorMessage('');
                 const {token}=response.data;
                 if(token){
+                    console.log(token);
                     localStorage.setItem('token',token);
                     Navigate('/chat')
                 }
