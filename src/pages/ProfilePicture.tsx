@@ -17,6 +17,10 @@ type ProfilePictureProps = {
         "variant06"| "variant07"| "variant08"| "variant09"| "variant10"|
         "variant11"| "variant12"| "variant13"| "variant14"| "variant15"|"variant16"| "variant17"| "variant18"| "variant19"| "variant20"|"variant21"| "variant22"| "variant23"| "variant24"| "variant25"|
         "variant26"|"variant27"| "variant28"| "variant29"| "variant30"
+    type earringtype="variant01"| "variant02"| "variant03"| "variant04"| "variant05"|
+        "variant06"
+    type featuretype="birthmark"|"blush"|"freckles"|"mustache"
+    type glassestype="variant01"| "variant02"| "variant03"| "variant04"| "variant05"
 const ProfilePicture = ({delay}:ProfilePictureProps) => {
     const eyebrowsliderVariants:eyebrowvarianttype[] = [
         "variant01", "variant02", "variant03", "variant04", "variant05",
@@ -38,11 +42,21 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
         "variant11", "variant12", "variant13", "variant14", "variant15","variant16", "variant17", "variant18", "variant19", "variant20","variant21", "variant22", "variant23", "variant24", "variant25",
         "variant26","variant27", "variant28", "variant29", "variant30"
     ]
+    const earringvariants:earringtype[]=[
+        "variant01", "variant02", "variant03", "variant04", "variant05",
+        "variant06"
+    ]
     const colors = [
         '#9e5622','#763900','#d2a37b', 
         '#b58c6d', 
         '#a16a4f','#ecad80','#f2d3b1','#e2b08c'
       ];
+    const features:featuretype[]=[
+        "birthmark","blush","freckles","mustache"
+    ]
+    const glasses:glassestype[]=[
+        "variant01", "variant02", "variant03", "variant04", "variant05"
+    ]
     const [loading, setLoading] = useState(true);
     const [flip,setflip]=useState<boolean>(false);
     const [backgroundcolor,setbackgroundcolor]=useState('ffffff')
@@ -52,6 +66,12 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     const [haircolour,sethaircolour]=useState('ffffff')
     const [mouthindex,setmouthindex]=useState(0);
     const [skincolour,setskincolour]=useState('b58c6d');
+    const [earringtypeindex,setearringypeindex]=useState(0);
+    const [earringprobability,setearringprobability]=useState(0);
+    const [featureindex,setfeatureindex]=useState(0);
+    const [featureprobability,setfeatureprobability]=useState(0);
+    const [glassesindex,setglassesindex]=useState(0);
+    const [glassesprobability,setglassesprobability]=useState(0);
   if(loading)
   {
     return (<Loading
@@ -89,6 +109,18 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
         sethairindex(numberforHair%45);
         const numberforMouth=Math.floor(Math.random()*1000);
         setmouthindex(numberforMouth%30)
+        const numberforearring=Math.floor(Math.random()*1000);
+        setearringypeindex(numberforearring%6);
+        const numberforearringprobability=Math.floor(Math.random()*1000);
+        setearringprobability(numberforearringprobability%101)
+        const numberforfeature=Math.floor(Math.random()*1000);
+        setfeatureindex(numberforfeature%4);
+        const numberforfeatureprobability=Math.floor(Math.random()*1000);
+        setfeatureprobability(numberforfeatureprobability%101)
+        const numberforglasses=Math.floor(Math.random()*1000);
+        setglassesindex(numberforglasses%5);
+        const numberforglassesprobability=Math.floor(Math.random()*1000);
+        setglassesprobability(numberforglassesprobability%101);
         const numberforSkin=Math.floor(Math.random()*1000);
         setskincolour(colors[numberforSkin%8].replace('#',''))
         const backgroundhexColor = `${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
@@ -97,6 +129,7 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
         sethaircolour(hairhexColor);
     }
   const avatar = createAvatar(adventurer, {
+    randomizeIds: true,
     flip:flip,
     backgroundColor: [backgroundcolor],
     eyebrows:[eyebrowsliderVariants[eyebrowvalueIndex]],
@@ -104,8 +137,13 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     hair:[hairvariants[hairindex]],
     hairColor:[haircolour],
     mouth:[mouthvariants[mouthindex]],
-    glassesProbability: 50,
-    skinColor:[skincolour]
+    skinColor:[skincolour],
+    earrings:[earringvariants[earringtypeindex]],
+    earringsProbability:earringprobability,
+    features:[features[featureindex]],
+    featuresProbability:featureprobability,
+    glasses:[glasses[glassesindex]],
+    glassesProbability: glassesprobability,
   });
   const svg = avatar.toDataUri();
   return (
