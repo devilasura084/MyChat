@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { SetStateAction, useState } from 'react'
 import Loading from '../components/Loading';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -7,12 +7,18 @@ import { useNavigate } from 'react-router-dom';
 
 type SigninProps = {
     delay: number;
+    setuserdetail:React.Dispatch<SetStateAction<userdetailtype>>
   };
+  interface userdetailtype {
+    email:string,
+    name:string,
+    contactlist:string[]
+  }
 interface signinformelements{
     email ?:string,
     password?:string,
 }
-const Signin = ({delay}:SigninProps) => {
+const Signin = ({delay,setuserdetail}:SigninProps) => {
     const Navigate=useNavigate()
     const [userdata,setuserdata]=useState<signinformelements>({});
     const [errorMessage, setErrorMessage] = useState<string>('');
@@ -55,9 +61,15 @@ const Signin = ({delay}:SigninProps) => {
                 return
             }
             try{
-                const response=await axios.post('http://localhost:5000/api/Sign-in',userdata);
+                const response=await axios.post('http://localhost:5000/auth/Sign-in',userdata);
                 setErrorMessage('');
-                const {token}=response.data;
+                const {token,email,username,contactlist}=response.data;
+                const user={
+                    email:email,
+                    name:username,
+                    contactlist:contactlist
+                }
+                setuserdetail(user);
                 if(token){
                     console.log(token);
                     localStorage.setItem('token',token);

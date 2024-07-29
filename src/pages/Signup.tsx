@@ -70,7 +70,7 @@ const Signup = ({delay}:SignupProps) => {
             password:password,
         }
         try {
-             await axios.post('http://localhost:5000/api/Sign-up',user);
+             await axios.post('http://localhost:5000/auth/Sign-up',user);
             setErrorMessage('');
             console.log('data sent');
             Navigate('/sign-in');

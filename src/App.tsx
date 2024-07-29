@@ -6,9 +6,20 @@ import Signin from './pages/Signin'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Chat from './pages/Chat'
-
+import { useState } from 'react'
+import ProfilePicture from './pages/ProfilePicture'
+interface userdetailtype {
+  email:string,
+  name:string,
+  contactlist:string[]
+}
 function App() {
   const Loadingdelay=150;
+  const [userdetail,setuserdetail]=useState<userdetailtype>({
+    email: 'default@example.com',
+    name: 'Default Name',
+    contactlist: []}
+  );
   return (
     <>
       <Router>
@@ -21,6 +32,7 @@ function App() {
           />}/>
           <Route path='/sign-in' element={<Signin
           delay={Loadingdelay}
+          setuserdetail={setuserdetail}
           />}/>
           <Route path='/about' element={<About
           delay={Loadingdelay}
@@ -29,6 +41,10 @@ function App() {
           delay={Loadingdelay}
           />}/>
           <Route path='/chat' element={<Chat
+          delay={Loadingdelay}
+          userdetail={userdetail}
+          />}/>
+          <Route path='/profilepicture' element={<ProfilePicture
           delay={Loadingdelay}
           />}/>
         </Routes>

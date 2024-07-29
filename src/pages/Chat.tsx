@@ -8,13 +8,19 @@ import { useNavigate } from 'react-router-dom';
 
 type ChatProps = {
   delay: number;
+  userdetail:userdetailtype
 };
+interface userdetailtype {
+  email:string,
+  name:string,
+  contactlist:string[]
+}
 interface contacts{
   name:string,
   email:string,
   imageUrl:string
 }
-const Chat = ({delay}:ChatProps) => {
+const Chat = ({delay,userdetail}:ChatProps) => {
   const Navigate=useNavigate();
   const [contactdetails,setContactdetails] =useState<contacts|undefined>();
   const [loading, setLoading] = useState(true);
@@ -33,7 +39,7 @@ const Chat = ({delay}:ChatProps) => {
     />)
   }
   const userdata={
-    name:"Subhoraj Das",
+    name:userdetail.name,
     imageUrl:"https://via.placeholder.com/50"
   }
   return (
