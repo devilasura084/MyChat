@@ -1,14 +1,12 @@
-interface contacts{
-    name:string,
-    email:string,
-    imageUrl:string
-}
+import { contacttype } from "../types/types";
+
+
 interface contactlistprops{
-    setContactdetails: React.Dispatch<React.SetStateAction<contacts| undefined>>;
-    contacts:contacts[];
+    setContactdetails: React.Dispatch<React.SetStateAction<contacttype| undefined>>;
+    contacts:contacttype[];
 }
 const ContactList = ({setContactdetails,contacts}:contactlistprops) => {
-    const handleClick=(key:contacts)=>{
+    const handleClick=(key:contacttype)=>{
         setContactdetails(key);}
   return (
     <div>

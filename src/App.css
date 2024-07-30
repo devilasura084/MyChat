@@ -224,13 +224,15 @@
     align-items: center;
     margin-top: 3svh;
     margin-left: 2svw;
-    img{
-        border-radius: 100%;
-        border: 1px solid rgb(255, 69, 0);
-    }
     div{
-        margin-left: 2svw;
+        margin-left: 1svw;
     }
+}
+.avatar{
+    border-radius: 100%;
+    border: 2px solid rgb(255, 69, 0);
+    width: 5rem;
+    height: 5rem;
 }
 .search-box{
     display: flex;
@@ -344,7 +346,6 @@
   .bubble {
     --r: 1.5rem;  /* the radius */
     --t: 1em; /* the size of the tail */
-    
     max-width: 300px;
     margin-top: 2vh;
     margin-bottom: 2vh;
@@ -374,7 +375,7 @@
       radial-gradient(100% 100% at var(--_p) 0,#0000 99%,#000 102%) 
         var(--_p) 100%/var(--t) var(--t) no-repeat,
       linear-gradient(#000 0 0) padding-box;
-    background: linear-gradient(135deg,orangered,#ffa600) border-box;
+    background: linear-gradient(135deg,#ff6f00,#ff6f00) border-box;
     color: #fff;
   }
   .icons{

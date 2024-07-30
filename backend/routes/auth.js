@@ -17,6 +17,27 @@ router.route('/Sign-up').post(async (req,res)=>{
         res.status(500).send('Error saving data');
     }
 });
+router.route('/setprofilepicture/:email').put(async (req,res)=>{
+    try {
+        const {email}=req.params;
+        const updatedata=req.body;
+        const updateduser=await userModel.findOneAndUpdate(
+            {email:email},
+        updatedata,
+        {
+            new:true,runValidators:true
+        }
+        )
+        if (!updateduser)
+            return res.status(404).json({ message: 'User not found' });
+          
+          res.status(200).json({ message: 'Profile picture updated successfully', user: updateduser });
+    } catch (error) {
+        console.error('Error updating user:', error);
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+    
+})
 router.route('/Sign-in').post(async(req,res)=>{
     try{
         const {email,password}=req.body;
@@ -30,7 +51,8 @@ router.route('/Sign-in').post(async(req,res)=>{
             token:token,
             username:existingUser.name,
             email:existingUser.email,
-            contactlist:existingUser.contactlist
+            contactlist:existingUser.contactlist,
+            imageUrl:existingUser.imageUrl
         }
         res.json(data)
         console.log("succesfully logged in");

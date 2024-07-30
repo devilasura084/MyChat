@@ -1,27 +1,19 @@
 
 import ContactList from './ContactList'
-
-interface UserDataType{
-  name:string
-  imageUrl:string
-}
-interface contacts{
-  name:string,
-  email:string,
-  imageUrl:string
-}
+import { useAppSelector } from '../types/hook'
+import { contacttype } from '../types/types'
 interface ChatsidebarProps {
-  contactlist:contacts[]
-  userdata: UserDataType;
-  setContactdetails: React.Dispatch<React.SetStateAction<contacts | undefined>>;
+  contactlist:contacttype[]
+  setContactdetails: React.Dispatch<React.SetStateAction<contacttype | undefined>>;
 }
 
-const Chatsidebar = ({ contactlist,userdata, setContactdetails }:ChatsidebarProps) => {
+const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {
+  const user=useAppSelector(state=>state.user);
   return (
     <div className='chatsidebar'>
         <div className='user-logo'>
-          <img src={userdata.imageUrl} alt={`${userdata.name}'s avatar`} />
-          <div>{userdata.name}</div>
+          <img className='avatar' src={user.imageUrl} alt={`${user.name}'s avatar`} />
+          <div>{user.name}</div>
           <div className="icons">
           <img src="/addaccount.svg" alt="addacc" />
           <img src="/moreoption.svg" alt="moreoption" />
@@ -33,7 +25,7 @@ const Chatsidebar = ({ contactlist,userdata, setContactdetails }:ChatsidebarProp
         </div>
         <ContactList
         setContactdetails={setContactdetails}
-        contacts={contactlist}
+        contacts={user.contactlist}
         />
     </div>
   )

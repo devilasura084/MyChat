@@ -1,15 +1,19 @@
 
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
+import { clearUserDetails } from '../types/userslice';
+import { useAppDispatch } from '../types/hook';
 const Navbar = () => {
   const [token,setToken]=useState<String|null>();
   const location=useLocation();
   const pathname=location.pathname;
+  const dispatch=useAppDispatch()
   useEffect(()=>{
     setToken(localStorage.getItem('token'));
   },[])
   const deleteToken=()=>{
     localStorage.removeItem('token');
+    dispatch(clearUserDetails);
     window.location.reload();
   }
   return (

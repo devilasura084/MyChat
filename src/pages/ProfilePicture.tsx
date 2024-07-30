@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Loading from '../components/Loading';
 import { createAvatar } from '@dicebear/core';
 import { adventurer } from '@dicebear/collection';
 import ColorSelectorpoper from '../components/ColorSelectorpoper';
 import {ColorResult, CirclePicker} from 'react-color'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 type ProfilePictureProps = {
     delay: number;
   };
@@ -57,8 +59,8 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     const glasses:glassestype[]=[
         "variant01", "variant02", "variant03", "variant04", "variant05"
     ]
+    const Navigate=useNavigate();
     const [loading, setLoading] = useState(true);
-    const [flip,setflip]=useState<boolean>(false);
     const [backgroundcolor,setbackgroundcolor]=useState('ffffff')
     const [eyebrowvalueIndex, seteyebrowValueIndex] = useState(0);
     const [eyevalueindex,seteyevalueindex]=useState(0);
@@ -72,16 +74,19 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     const [featureprobability,setfeatureprobability]=useState(0);
     const [glassesindex,setglassesindex]=useState(0);
     const [glassesprobability,setglassesprobability]=useState(0);
-  if(loading)
-  {
-    return (<Loading
-    delay={delay}
-    setLoading={setLoading}
-    />)
-  }
-  const handleFlip=()=>{
-    setflip(!flip);
-  }
+    useEffect(() => {
+      if (!loading) {
+        randomize();
+      }
+    }, [loading]);
+    if(loading)
+    {
+      return (<Loading
+      delay={delay}
+      setLoading={setLoading}
+      />)
+    }
+    
   const handleEyebrowchange = (e: React.ChangeEvent<HTMLInputElement>) => {
     seteyebrowValueIndex(parseInt(e.target.value, 10));
   };
@@ -100,37 +105,24 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     {
         setskincolour(color.hex.replace('#',''))
     }
-    const randomize=()=>{
-        const numberforbrows=Math.floor(Math.random()*1000);
-        seteyebrowValueIndex(numberforbrows%14);
-        const numberforeyes=Math.floor(Math.random()*1000);
-        seteyevalueindex(numberforeyes%26)
-        const numberforHair=Math.floor(Math.random()*1000);
-        sethairindex(numberforHair%45);
-        const numberforMouth=Math.floor(Math.random()*1000);
-        setmouthindex(numberforMouth%30)
-        const numberforearring=Math.floor(Math.random()*1000);
-        setearringypeindex(numberforearring%6);
-        const numberforearringprobability=Math.floor(Math.random()*1000);
-        setearringprobability(numberforearringprobability%101)
-        const numberforfeature=Math.floor(Math.random()*1000);
-        setfeatureindex(numberforfeature%4);
-        const numberforfeatureprobability=Math.floor(Math.random()*1000);
-        setfeatureprobability(numberforfeatureprobability%101)
-        const numberforglasses=Math.floor(Math.random()*1000);
-        setglassesindex(numberforglasses%5);
-        const numberforglassesprobability=Math.floor(Math.random()*1000);
-        setglassesprobability(numberforglassesprobability%101);
-        const numberforSkin=Math.floor(Math.random()*1000);
-        setskincolour(colors[numberforSkin%8].replace('#',''))
-        const backgroundhexColor = `${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
-        setbackgroundcolor(backgroundhexColor)
-        const hairhexColor = `${Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0')}`;
-        sethaircolour(hairhexColor);
-    }
+    const randomize = () => {
+      seteyebrowValueIndex(Math.floor(Math.random() * 14));
+      seteyevalueindex(Math.floor(Math.random() * 26));
+      sethairindex(Math.floor(Math.random() * 45));
+      setmouthindex(Math.floor(Math.random() * 30));
+      setearringypeindex(Math.floor(Math.random() * 6));
+      setearringprobability(Math.floor(Math.random() * 101));
+      setfeatureindex(Math.floor(Math.random() * 4));
+      setfeatureprobability(Math.floor(Math.random() * 101));
+      setglassesindex(Math.floor(Math.random() * 5));
+      setglassesprobability(Math.floor(Math.random() * 101));
+      setskincolour(colors[Math.floor(Math.random() * 8)].replace('#', ''));
+      setbackgroundcolor(Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0'));
+      sethaircolour(Math.floor(Math.random() * 0xFFFFFF).toString(16).padStart(6, '0'));
+    };
+    
   const avatar = createAvatar(adventurer, {
     randomizeIds: true,
-    flip:flip,
     backgroundColor: [backgroundcolor],
     eyebrows:[eyebrowsliderVariants[eyebrowvalueIndex]],
     eyes:[eyeslidervariants[eyevalueindex]],
@@ -146,15 +138,24 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     glassesProbability: glassesprobability,
   });
   const svg = avatar.toDataUri();
+  const setnewprofilepicture=async ()=>{
+    const email=localStorage.getItem('email');
+    
+    if(!email)return;
+    try{
+      await axios.put(`http://localhost:5000/auth/setprofilepicture/${email}`,{ imageUrl: svg });
+        Navigate('/sign-in');
+    }
+    catch(error:any){
+      console.error('Error updating invoice:', error);
+      throw error;
+    }
+    localStorage.removeItem('email');
+  }
   return (
     <div className='profile-pic'>
         <div className='profilepic-sidebar'>
             <div className='eachbutton onlyfirst'>
-            <button className="button" onClick={handleFlip}>
-              <span>Flip</span>
-            </button>
-            </div>
-            <div className='eachbutton'>
                 <ColorSelectorpoper
                 name={'Background Colour'}
                 setbackgroundcolor={setbackgroundcolor}
@@ -259,6 +260,13 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
             <div className='eachbutton '>
             <button className="button" onClick={randomize}>
               <span>Randomize</span>
+            </button>
+            </div>
+            </div>
+            <div>
+            <div className='eachbutton '>
+            <button className="button" onClick={setnewprofilepicture}>
+              <span>Sign Up</span>
             </button>
             </div>
             </div>

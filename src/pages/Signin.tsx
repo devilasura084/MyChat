@@ -1,29 +1,25 @@
-import React, { SetStateAction, useState } from 'react'
+import React, { useState } from 'react'
 import Loading from '../components/Loading';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import { useAppDispatch } from '../types/hook';
+import { setUserDetails} from '../types/userslice';
 type SigninProps = {
     delay: number;
-    setuserdetail:React.Dispatch<SetStateAction<userdetailtype>>
   };
-  interface userdetailtype {
-    email:string,
-    name:string,
-    contactlist:string[]
-  }
 interface signinformelements{
     email ?:string,
     password?:string,
 }
-const Signin = ({delay,setuserdetail}:SigninProps) => {
+const Signin = ({delay}:SigninProps) => {
     const Navigate=useNavigate()
     const [userdata,setuserdata]=useState<signinformelements>({});
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [showpassword,setshowpassword]=useState(false);
     const [loading, setLoading] = useState(true);
+    const dispatch = useAppDispatch();
     if(loading)
     {
       return (<Loading
@@ -63,13 +59,15 @@ const Signin = ({delay,setuserdetail}:SigninProps) => {
             try{
                 const response=await axios.post('http://localhost:5000/auth/Sign-in',userdata);
                 setErrorMessage('');
-                const {token,email,username,contactlist}=response.data;
+                const {token,email,username,contactlist,imageUrl}=response.data;
                 const user={
                     email:email,
                     name:username,
+                    imageUrl:imageUrl,
                     contactlist:contactlist
                 }
-                setuserdetail(user);
+                console.log(user);
+                dispatch(setUserDetails(user))
                 if(token){
                     console.log(token);
                     localStorage.setItem('token',token);

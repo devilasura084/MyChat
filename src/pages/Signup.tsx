@@ -73,7 +73,8 @@ const Signup = ({delay}:SignupProps) => {
              await axios.post('http://localhost:5000/auth/Sign-up',user);
             setErrorMessage('');
             console.log('data sent');
-            Navigate('/sign-in');
+            localStorage.setItem('email',user.email);
+            Navigate('/profilepicture');
         } catch (error:any) {
             if(error.response && error.response.status==400)
                 {setErrorMessage(error.response.data.message);
