@@ -92,7 +92,7 @@ const Signin = ({delay}:SigninProps) => {
     <Navbar/>
     <div className='Main-form'>
         
-        <form className='Signin' onSubmit={handleSubmit}>
+        <form style={{outline:'auto'}} className='Signin' onSubmit={handleSubmit}>
         {errorMessage && <p style={{ color: 'red',margin:0,padding:0}}>{errorMessage}</p>}
             Email
             <input placeholder='your email' className='form-item' type='email' onChange={(e)=>{
@@ -106,7 +106,9 @@ const Signin = ({delay}:SigninProps) => {
             }}/>
             <img className='password-eye' onClick={handleEye} src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE" style={{width:20}} />
             </div>
-            <button className='submit-button' type="submit">Sign In</button>
+            <button style={{width:"22svw"}} type='submit' className="button">
+              <span>Sign In</span>
+            </button>
             <span>Don't have an account?<a href="/sign-up">Register</a></span>
         </form>
     </div>

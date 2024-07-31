@@ -1,23 +1,14 @@
 
 
+import { ContactType } from '../types/types';
 import ChatBetweenPeople from './ChatBetweenPeople';
 import MainChatBar from './MainChatBar';
 import MainChatTitle from './MainChatTitle';
+
 interface mainchatprops{
-  contactdetails: contacts | undefined;
-  messages:message[]
+  contactdetails?: ContactType
 }
-interface contacts{
-  name:string,
-  email:string,
-  imageUrl:string
-}
-interface message{
-      sender: string,
-      message: string,
-      timestamp: Date
-}
-const MainChat = ({messages,contactdetails}:mainchatprops) => {
+const MainChat = ({contactdetails}:mainchatprops) => {
   if (contactdetails === undefined) {
     return <div className='main-chat'><div /></div>;
   }
@@ -28,7 +19,7 @@ const MainChat = ({messages,contactdetails}:mainchatprops) => {
       contactimg={contactdetails.imageUrl}
       />
       <ChatBetweenPeople
-      messages={messages}
+      messages={contactdetails.messages}
       />
       <MainChatBar/>
     </div>

@@ -21,8 +21,10 @@ const Home = ({delay}:HomeProps) => {
       <p className='Home-text'>
           Start chatting with anyone at anytime with <span>MyChat</span>
         </p>
-        <a className='start-chatting-button' href="/chat">
-        start chatting now {`->`}
+        <a  href="/chat">
+        <button style={{width:"20rem",marginLeft:"35svw",fontSize:"large"}} className="button" >
+              <span>start chatting now {`->`}</span>
+            </button>
         </a>
         <Footer/>
         </div>

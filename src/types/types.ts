@@ -1,15 +1,27 @@
-// src/types/types.ts
-export interface UserDetailType {
-    email: string;
-    name: string;
-    imageUrl: string;
-    contactlist: contacttype[];
-  }
-export interface contacttype{
-    email: string;
-    name: string;
-    imageUrl: string;
+
+
+export interface Message {
+  name: string;
+  message: string;
+  date: Date;
+  edited: boolean;
+  deleted: boolean;
 }
-  export interface RootState {
-    user: UserDetailType;
-  }
+
+export interface ContactType {
+  email: string;
+  name: string;
+  imageUrl: string;
+  messages: Message[];
+}
+
+export interface UserDetailType {
+  email: string;
+  name: string;
+  imageUrl: string;
+  contactlist: ContactType[];
+}
+
+export interface RootState {
+  user: UserDetailType;
+}

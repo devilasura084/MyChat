@@ -1,12 +1,12 @@
-import { contacttype } from "../types/types";
+import { ContactType } from "../types/types";
 
 
 interface contactlistprops{
-    setContactdetails: React.Dispatch<React.SetStateAction<contacttype| undefined>>;
-    contacts:contacttype[];
+    setContactdetails: React.Dispatch<React.SetStateAction<ContactType| undefined>>;
+    contacts:ContactType[];
 }
 const ContactList = ({setContactdetails,contacts}:contactlistprops) => {
-    const handleClick=(key:contacttype)=>{
+    const handleClick=(key:ContactType)=>{
         setContactdetails(key);}
   return (
     <div>

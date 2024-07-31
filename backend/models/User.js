@@ -14,6 +14,24 @@ const userSchema=new mongoose.Schema({
             imageUrl:{
                 type:String,
                 default:'https://via.placeholder.com/50'
+            },
+            messages:{
+                type:[
+                    {
+                        name:String,
+                        message:String,
+                        date:Date,
+                        edited:{
+                            type:Boolean,
+                            default:false,
+                        },
+                        deleted:{
+                            type:Boolean,
+                            default:false
+                        }
+                    }
+                ],
+                default:[]
             }
         }],
         default:[]

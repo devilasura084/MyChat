@@ -1,10 +1,10 @@
 
 import ContactList from './ContactList'
 import { useAppSelector } from '../types/hook'
-import { contacttype } from '../types/types'
+import { ContactType } from '../types/types'
 interface ChatsidebarProps {
-  contactlist:contacttype[]
-  setContactdetails: React.Dispatch<React.SetStateAction<contacttype | undefined>>;
+  contactlist:ContactType[]
+  setContactdetails: React.Dispatch<React.SetStateAction<ContactType | undefined>>;
 }
 
 const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {

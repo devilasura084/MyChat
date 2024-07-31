@@ -87,8 +87,8 @@ const Signup = ({delay}:SignupProps) => {
         
     }
   return (
-    <div>
-        <form className='Signup' onSubmit={handleSubmit}>
+    <div >
+        <form style={{outline:'auto'}} className='Signup' onSubmit={handleSubmit}>
             {errorMessage && <p style={{ color: 'red',margin:0,padding:0 }}>{errorMessage}</p>}
             Username
             <input placeholder='Your username' className='form-item' type='text' onChange={(e)=>{
@@ -112,7 +112,9 @@ const Signup = ({delay}:SignupProps) => {
             onChange={(e)=>{
                 setuserdata({...userdata,confirmpassword:e.target.value});
             }}/>
-            <button className='submit-button' type="submit">Sign Up</button>
+            <button style={{width:"22svw"}} type='submit' className="button">
+              <span>Sign Up</span>
+            </button>
             <span>Already have an account?<a href="/sign-in">Login</a></span>
         </form>
     </div>

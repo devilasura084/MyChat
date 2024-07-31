@@ -8,8 +8,10 @@ const Footer = () => {
         <p className='Footer-text'>
             Ready to start chatting with your friends and loved one with <span>MyChat</span>
         </p>
-        <a className='start-chatting-button' href="/chat">
-        start chatting now {`->`}
+        <a  href="/chat">
+        <button style={{width:"20rem",marginLeft:"10svw",fontSize:"large"}} className="button" >
+              <span>start chatting now {`->`}</span>
+            </button>
         </a>
         <div className='links'>
             <a href="/">
