@@ -1,6 +1,7 @@
 import { createPopper, Instance } from '@popperjs/core';
 import { SetStateAction, useRef, useState, useEffect } from 'react';
 import ColorSlector from './ColorSlector';
+import { Button } from './ui/button';
 
 interface ColorPickerpoperprops {
     name: string
@@ -54,8 +55,9 @@ const ColorSelectorpoper = ({ name, setbackgroundcolor }: ColorPickerpoperprops)
 
     return (
         <>
-             <button ref={buttonRef} className="button" onClick={togglePopper}>
-              <span>{name}</span>
+             
+             <button ref={buttonRef} onClick={togglePopper}>
+              <span className=''>{name}</span>
             </button>
             {isOpen && (
                 <div ref={popperRef}>

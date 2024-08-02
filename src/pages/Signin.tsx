@@ -6,6 +6,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../types/hook';
 import { setUserDetails} from '../types/userslice';
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button"
 type SigninProps = {
     delay: number;
   };
@@ -90,26 +92,21 @@ const Signin = ({delay}:SigninProps) => {
   return (
     <>
     <Navbar/>
-    <div className='Main-form'>
-        
-        <form style={{outline:'auto'}} className='Signin' onSubmit={handleSubmit}>
+    <div className='flex justify-center mt-40 mb-40' >
+        <form className='flex w-80 flex-col gap-2 border p-10 rounded-md bg-white ' onSubmit={handleSubmit}>
         {errorMessage && <p style={{ color: 'red',margin:0,padding:0}}>{errorMessage}</p>}
-            Email
-            <input placeholder='your email' className='form-item' type='email' onChange={(e)=>{
+            <Input type='email' placeholder='Email' onChange={(e)=>{
                 setuserdata({...userdata,email:e.target.value});
             }} />
-            Password
-            <div className='password-showpassword'>
-            <input placeholder='password'  type={showpassword?"text":"password"}
+            <div  className="h-10 w-full relative">
+            <input placeholder='Password' className='flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 '  type={showpassword?"text":"password"}
             onChange={(e)=>{
                 setuserdata({...userdata,password:e.target.value});
             }}/>
-            <img className='password-eye' onClick={handleEye} src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE" style={{width:20}} />
+            <img className='absolute right-2 bottom-2 w-5' onClick={handleEye} src={showpassword?'close-eye.svg':'eye.svg'} alt="EYE"  />
             </div>
-            <button style={{width:"22svw"}} type='submit' className="button">
-              <span>Sign In</span>
-            </button>
-            <span>Don't have an account?<a href="/sign-up">Register</a></span>
+            <Button>Sign in</Button>
+            <span>Don't have an account?<a href="/sign-up" className='text-orange-500'>Register</a></span>
         </form>
     </div>
     <Footer/>

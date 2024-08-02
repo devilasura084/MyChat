@@ -17,16 +17,16 @@ const Navbar = () => {
     window.location.reload();
   }
   return (
-    <div className='Navbar'>
+    <div className='h-28 flex items-center bg-orange-500 rounded'>
         <a href="/">
-        <img src="icon.svg" alt="icon" style={{width:40,margin:10}} />
+        <img src="icon.svg" alt="icon" className='h-12 w-12 ml-10' />
         </a>
-        <div className='Nav-items'>
-        <a className={pathname==="/about"?"isActive":"isInActive"} href="/about">About</a>
-        <a className={pathname==="/contact"?"isActive":"isInActive"} href="/contact">Contact</a>
+        <div className='ml-auto mr-10 flex gap-10 text-xl font-semibold'>
+        <a className={pathname==="/about"?" text-white":"text-black"} href="/about">About</a>
+        <a className={pathname==="/contact"?" text-white":"text-black"} href="/contact">Contact</a>
         {
         token?<div className='logout' onClick={deleteToken}>Logout</div>:  
-        <a className={pathname==="/sign-in"?"isActive":"isInActive"} href="/sign-in">Login</a>}
+        <a className={pathname==="/sign-in"?" text-white":"text-black"} href="/sign-in">Login</a>}
         </div>
         
     </div>

@@ -18,11 +18,11 @@ const Home = ({delay}:HomeProps) => {
   return (
       <div>
         <Navbar/>
-      <p className='Home-text'>
-          Start chatting with anyone at anytime with <span>MyChat</span>
+      <p className='text-5xl max-w-xl ml-40 mt-20'>
+          Start chatting with anyone at anytime with <span className="text-orange-500">MyChat</span>
         </p>
         <a  href="/chat">
-        <button style={{width:"20rem",marginLeft:"35svw",fontSize:"large"}} className="button" >
+        <button className="w-44 h-16 bg-orange-500 rounded-lg text-white hover:bg-orange-400 text-l ml-40 mt-5 indent-1 font-semibold transition-all">
               <span>start chatting now {`->`}</span>
             </button>
         </a>

@@ -9,11 +9,6 @@ const ColorSlector = ({setbackgroundcolor}:ColorPickerprops) => {
     }
   return (
     <div
-    style={{
-            zIndex: 999,
-            position:'fixed',
-            left:420
-        }}
     >
         <SwatchesPicker
     onChange={handdleChange}/>

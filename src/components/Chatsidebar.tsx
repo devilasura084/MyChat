@@ -2,6 +2,7 @@
 import ContactList from './ContactList'
 import { useAppSelector } from '../types/hook'
 import { ContactType } from '../types/types'
+import Addaccount from '../services/Addaccount';
 interface ChatsidebarProps {
   contactlist:ContactType[]
   setContactdetails: React.Dispatch<React.SetStateAction<ContactType | undefined>>;
@@ -15,7 +16,7 @@ const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {
           <img className='avatar' src={user.imageUrl} alt={`${user.name}'s avatar`} />
           <div>{user.name}</div>
           <div className="icons">
-          <img src="/addaccount.svg" alt="addacc" />
+          <Addaccount/>
           <img src="/moreoption.svg" alt="moreoption" />
           </div>
         </div>

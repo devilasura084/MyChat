@@ -2,9 +2,7 @@ const express=require('express');
 const bodyparser=require('body-parser');
 const cors=require('cors');
 const mongoose=require('mongoose');
-const userModel=require('./models/User');
 const app=express();
-const jwt=require('jsonwebtoken')
 const authenticateJWT=require('./middleware/authMiddleware');
 require('dotenv').config();
 app.use(cors());

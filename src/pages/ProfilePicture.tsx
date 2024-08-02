@@ -6,6 +6,14 @@ import ColorSelectorpoper from '../components/ColorSelectorpoper';
 import {ColorResult, CirclePicker} from 'react-color'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Button } from '@/components/ui/button';
+import ColorSlector from '@/components/ColorSlector';
+import { Slider } from "@/components/ui/slider";
 type ProfilePictureProps = {
     delay: number;
   };
@@ -87,19 +95,19 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
       />)
     }
     
-  const handleEyebrowchange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    seteyebrowValueIndex(parseInt(e.target.value, 10));
+  const handleEyebrowchange = (value:number[]) => {
+    seteyebrowValueIndex(value[0]);
   };
-  const handleEyechange=(e:React.ChangeEvent<HTMLInputElement>)=>{
-    seteyevalueindex(parseInt(e.target.value,10))
+  const handleEyechange=(value:number[])=>{
+    seteyevalueindex(value[0])
   }
-  const handlehairchange=(e:React.ChangeEvent<HTMLInputElement>)=>
+  const handlehairchange=(value:number[])=>
   {
-    sethairindex(parseInt(e.target.value,10))
+    sethairindex(value[0])
   }
-  const handlemouthchange=(e:React.ChangeEvent<HTMLInputElement>)=>
+  const handlemouthchange=(value:number[])=>
     {
-      setmouthindex(parseInt(e.target.value,10))
+      setmouthindex(value[0])
     }
     const handleskincolourchange=(color:ColorResult)=>
     {
@@ -153,128 +161,66 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     localStorage.removeItem('email');
   }
   return (
-    <div className='profile-pic'>
-        <div className='profilepic-sidebar'>
-            <div className='eachbutton onlyfirst'>
-                <ColorSelectorpoper
-                name={'Background Colour'}
-                setbackgroundcolor={setbackgroundcolor}
-                />
-            </div>
-            <div style={{fontSize:"1.2rem"}} className='eachbutton'>
-                Eye Brows
-                <div style={{backgroundColor:'#ff7605',
-                display:'flex',
-                flexDirection:'column',
-                padding:"1svw",
-                borderRadius:"10px",
-                outline:'auto',
-                width:"85%"
-                }}>
-		        <input className='range' 
-                type="range" 
+    <div className='flex bg-slate-200'>
+        <div className='flex flex-col gap-8 rounded-lg bg-white w-1/4 relative'>
+            <Popover>
+             <PopoverTrigger><Button className='w-5/6 mt-10 text-wrap'>Background Color</Button></PopoverTrigger>
+             <PopoverContent><ColorSlector
+             setbackgroundcolor={setbackgroundcolor}
+             /></PopoverContent>
+             </Popover>
+        
+            <Popover>
+             <PopoverTrigger><Button className='w-5/6  text-wrap'>Hair Color</Button></PopoverTrigger>
+             <PopoverContent><ColorSlector
+             setbackgroundcolor={sethaircolour}
+             /></PopoverContent>
+             </Popover>
+            <div className='flex flex-col indent-10 gap-2'>
+            Eye Brows
+            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
                 min={0}
-                max={13}
-                value={eyebrowvalueIndex}
-                onChange={handleEyebrowchange}
-                />
-                </div>
+                max={13} onValueChange={handleEyebrowchange}/>
             </div>
-            <div style={{fontSize:"1.2rem"}} className='eachbutton'>
-                Eye
-                <div style={{backgroundColor:'#ff7605',
-                display:'flex',
-                flexDirection:'column',
-                padding:"1svw",
-                borderRadius:"10px",
-                outline:'auto',
-                width:"85%"
-                }}>
-		        <input className='range' 
-                type="range" 
+            
+            <div className='flex flex-col indent-10 gap-2'>
+            Eye 
+            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
                 min={0}
-                max={25}
-                value={eyevalueindex}
-                onChange={handleEyechange}
-                />
-                </div>
+                max={25} onValueChange={handleEyechange}/>
             </div>
-            <div style={{fontSize:"1.2rem"}} className='eachbutton'>
-                Hair
-                <div style={{backgroundColor:'#ff7605',
-                display:'flex',
-                flexDirection:'column',
-                padding:"1svw",
-                borderRadius:"10px",
-                outline:'auto',
-                width:"85%"
-                }}>
-		        <input className='range' 
-                type="range" 
+            <div className='flex flex-col indent-10 gap-2'>
+            Hair
+            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
                 min={0}
-                max={hairvariants.length-1}
-                value={hairindex}
-                onChange={handlehairchange}
-                />
-                </div>
+                max={hairvariants.length-1} onValueChange={handlehairchange}/>
             </div>
-            <div className='eachbutton'>
-            <ColorSelectorpoper
-            name={'Hair colour'}
-            setbackgroundcolor={sethaircolour}
-            />
+            <div className='flex flex-col indent-10 gap-2'>
+            Hair
+            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
+                min={0}
+                max={mouthvariants.length-1} onValueChange={handlemouthchange}/>
             </div>
             <div>
-            <div style={{fontSize:"1.2rem"}} className='eachbutton'>
-                Mouth
-                <div style={{backgroundColor:'#ff7605',
-                display:'flex',
-                flexDirection:'column',
-                padding:"1svw",
-                borderRadius:"10px",
-                width:"85%",
-                outline:'auto',
-                }}>
-		        <input className='range' 
-                type="range" 
-                min={0}
-                max={29}
-                value={mouthindex}
-                onChange={handlemouthchange}
-                />
-                </div>
-            </div>
-            </div>
-            <div>
-            <div style={{fontSize:"1.2rem"}} className='eachbutton'>
+            <div className='flex flex-col gap-2 ml-8'>
                 Skin Colour
                 <CirclePicker
                 onChange={handleskincolourchange}
                 colors={colors}
-                width='26svw'
-                circleSize={35}
+                width='22svw'
+                circleSize={20}
                 />
             </div>
             </div>
-            <div>
-            <div className='eachbutton '>
-            <button className="button" onClick={randomize}>
-              <span>Randomize</span>
-            </button>
-            </div>
-            </div>
-            <div>
-            <div className='eachbutton '>
-            <button className="button" onClick={setnewprofilepicture}>
-              <span>Sign Up</span>
-            </button>
-            </div>
-            </div>
+            
+            <Button className='w-5/6  text-wrap ml-auto mr-auto ' onClick={randomize}>Randdomize</Button>
+            
+            <Button className='w-5/6  text-wrap ml-auto mr-auto' onClick={setnewprofilepicture}>Sign Up</Button>
         </div>
         <div
         style={{backgroundColor:`#${backgroundcolor}`}}
-        className='editing-profilepic'>
-        <img src={svg} alt="pp" />
+        className='flex-1 h-auto rounded-lg ml-5'>
+        <img style={{width:"42svw"}} className='ml-auto mr-auto mt-20' src={svg} alt="pp" />
         </div>
     </div>
   )
