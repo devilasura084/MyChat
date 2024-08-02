@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Loading from '../components/Loading';
 import { createAvatar } from '@dicebear/core';
 import { adventurer } from '@dicebear/collection';
-import ColorSelectorpoper from '../components/ColorSelectorpoper';
+
 import {ColorResult, CirclePicker} from 'react-color'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
