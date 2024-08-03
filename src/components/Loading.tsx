@@ -12,10 +12,10 @@ const Loading = ({delay,setLoading}:Loadingprops) => {
     }, delay); 
   }, []);
   return (<>
-    <div className="relative">
-    <div className="w-16 h-16 border-4 border-t-orange-500 border-gray-200 rounded-full animate-spin"></div>
+    <div className="flex">
+    <div className=" ml-auto mr-auto mt-96 w-16 h-16 border-4 border-t-orange-500 border-gray-200 rounded-full animate-spin">.</div>
   </div>
-    Loading......
+    
     </>
   )
 }

@@ -95,7 +95,7 @@ const Signup = ({delay}:SignupProps) => {
     <Navbar/>
     <div className='flex justify-center mt-40 mb-40'>
         <form className='flex w-80 flex-col gap-2 p-10 border rounded-md bg-white ' onSubmit={handleSubmit}>
-            {errorMessage && <p style={{ color: 'red',margin:0,padding:0 }}>{errorMessage}</p>}
+        {errorMessage && <p className="text-red-700 text-xs m-0 p-0">{errorMessage}</p>}
             <Input type='text' placeholder='Username' onChange={(e)=>{
                 setuserdata({...userdata,name:e.target.value});
             }}/>
@@ -112,7 +112,7 @@ const Signup = ({delay}:SignupProps) => {
             <Input type='password' placeholder='Confirm password' onChange={(e)=>{
                 setuserdata({...userdata,confirmpassword:e.target.value});
             }}/>
-            <Button>Sign in</Button>
+            <Button>Sign up</Button>
             <span>Already have an account?<a className='text-orange-500' href="/sign-in">Login</a></span>
         </form>
     </div>

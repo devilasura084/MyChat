@@ -6,7 +6,7 @@ interface ChatBetweenPeoplepeops{
 const ChatBetweenPeople = ({messages}:ChatBetweenPeoplepeops) => {
     const user=useAppSelector(state=>state.user);
   return (
-    <div className='chat-between-people'>
+    <div className=' h-[75%] bg-slate-100 p-4 rounded-md'>
         {
             messages.map((message,index)=>(
                 message.name===user.name?<div className="bubble right" key={index}>{message.message}</div>:<div key={index} className='bubble left'>{message.message}</div>

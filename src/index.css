@@ -3,7 +3,7 @@
 @tailwind utilities;
 body {
     font-family: "Gochi Hand", cursive;
-    background-color: azure;
+    background-color: rgb(211, 219, 219);
   }
 
   @layer base {
@@ -63,7 +63,9 @@ body {
     }
   }
   
-
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none; 
+  }
 @layer base {
   * {
     @apply border-border;

@@ -61,11 +61,12 @@ const Signin = ({delay}:SigninProps) => {
             try{
                 const response=await axios.post('http://localhost:5000/auth/Sign-in',userdata);
                 setErrorMessage('');
-                const {token,email,username,contactlist,imageUrl}=response.data;
+                const {token,email,username,contactlist,imageUrl,backgroundcolor}=response.data;
                 const user={
                     email:email,
                     name:username,
                     imageUrl:imageUrl,
+                    backgroundcolor:backgroundcolor,
                     contactlist:contactlist
                 }
                 console.log(user);
@@ -94,7 +95,7 @@ const Signin = ({delay}:SigninProps) => {
     <Navbar/>
     <div className='flex justify-center mt-40 mb-40' >
         <form className='flex w-80 flex-col gap-2 border p-10 rounded-md bg-white ' onSubmit={handleSubmit}>
-        {errorMessage && <p style={{ color: 'red',margin:0,padding:0}}>{errorMessage}</p>}
+        {errorMessage && <p className="text-red-700 text-xs m-0 p-0">{errorMessage}</p>}
             <Input type='email' placeholder='Email' onChange={(e)=>{
                 setuserdata({...userdata,email:e.target.value});
             }} />

@@ -151,7 +151,11 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
     
     if(!email)return;
     try{
-      await axios.put(`http://localhost:5000/auth/setprofilepicture/${email}`,{ imageUrl: svg });
+      const data={
+        imageUrl:svg,
+        backgroundcolor:backgroundcolor
+      }
+      await axios.put(`http://localhost:5000/auth/setprofilepicture/${email}`,data);
         Navigate('/sign-in');
     }
     catch(error:any){
@@ -169,7 +173,6 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
              setbackgroundcolor={setbackgroundcolor}
              /></PopoverContent>
              </Popover>
-        
             <Popover>
              <PopoverTrigger><Button className='w-5/6  text-wrap'>Hair Color</Button></PopoverTrigger>
              <PopoverContent><ColorSlector
@@ -178,28 +181,28 @@ const ProfilePicture = ({delay}:ProfilePictureProps) => {
              </Popover>
             <div className='flex flex-col indent-10 gap-2'>
             Eye Brows
-            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
+            <Slider className='w-5/6 ml-auto mr-auto' value={[eyebrowvalueIndex]}
                 min={0}
                 max={13} onValueChange={handleEyebrowchange}/>
             </div>
-            
             <div className='flex flex-col indent-10 gap-2'>
             Eye 
-            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
+            <Slider className='w-5/6 ml-auto mr-auto' value={[eyevalueindex]}
                 min={0}
                 max={25} onValueChange={handleEyechange}/>
             </div>
             <div className='flex flex-col indent-10 gap-2'>
             Hair
-            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
+            <Slider className='w-5/6 ml-auto mr-auto' value={[hairindex]}
                 min={0}
                 max={hairvariants.length-1} onValueChange={handlehairchange}/>
             </div>
             <div className='flex flex-col indent-10 gap-2'>
-            Hair
-            <Slider className='w-5/6 ml-auto mr-auto' defaultValue={[eyevalueindex]}
+            Mouth
+            <Slider className='w-5/6 ml-auto mr-auto' value={[mouthindex]}
                 min={0}
-                max={mouthvariants.length-1} onValueChange={handlemouthchange}/>
+                max={mouthvariants.length-1} onValueChange={handlemouthchange}
+                />
             </div>
             <div>
             <div className='flex flex-col gap-2 ml-8'>

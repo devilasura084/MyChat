@@ -30,7 +30,7 @@ const Chat = ({delay}:ChatProps) => {
     />)
   }
   return (
-        <div className='main-chat-div'>
+        <div className='flex'>
         <Chatsidebar
         contactlist={user.contactlist}
         setContactdetails={setContactdetails}

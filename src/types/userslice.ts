@@ -6,6 +6,7 @@ const initialState: UserDetailType = {
   email: '',
   name: '',
   imageUrl: 'https://via.placeholder.com/50',
+  backgroundcolor:'ffffff',
   contactlist: [],
 };
 
@@ -23,6 +24,7 @@ const userSlice = createSlice({
       state.contactlist.push({
         ...action.payload,
         imageUrl: action.payload.imageUrl || 'https://via.placeholder.com/50',
+        backgroundcolor:action.payload.backgroundcolor||'ffffff',
         messages: [],
       });
     },

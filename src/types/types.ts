@@ -12,6 +12,7 @@ export interface ContactType {
   email: string;
   name: string;
   imageUrl: string;
+  backgroundcolor:string;
   messages: Message[];
 }
 
@@ -19,6 +20,7 @@ export interface UserDetailType {
   email: string;
   name: string;
   imageUrl: string;
+  backgroundcolor:string;
   contactlist: ContactType[];
 }
 

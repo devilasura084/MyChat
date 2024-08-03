@@ -7,6 +7,7 @@ const userSchema=new mongoose.Schema({
         type:String,
         default:'https://via.placeholder.com/50'
     },
+    backgroundcolor:String,
     contactlist:{
         type:[{
             name:String,
@@ -14,6 +15,10 @@ const userSchema=new mongoose.Schema({
             imageUrl:{
                 type:String,
                 default:'https://via.placeholder.com/50'
+            },
+            backgroundcolor:{
+                type:String,
+                default:"ffffff"
             },
             messages:{
                 type:[

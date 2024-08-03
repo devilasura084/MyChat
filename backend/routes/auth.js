@@ -30,7 +30,6 @@ router.route('/setprofilepicture/:email').put(async (req,res)=>{
         )
         if (!updateduser)
             return res.status(404).json({ message: 'User not found' });
-          
           res.status(200).json({ message: 'Profile picture updated successfully', user: updateduser });
     } catch (error) {
         console.error('Error updating user:', error);
@@ -52,7 +51,8 @@ router.route('/Sign-in').post(async(req,res)=>{
             username:existingUser.name,
             email:existingUser.email,
             contactlist:existingUser.contactlist,
-            imageUrl:existingUser.imageUrl
+            imageUrl:existingUser.imageUrl,
+            backgroundcolor:existingUser.backgroundcolor,
         }
         res.json(data)
         console.log("succesfully logged in");
