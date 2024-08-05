@@ -1,7 +1,8 @@
 const express=require('express')
 const userModel=require('../models/User')
 const router=express.Router();
-const jwt=require('jsonwebtoken')
+const jwt=require('jsonwebtoken');
+require('dotenv').config();
 router.route('/Sign-up').post(async (req,res)=>{
     try{
         const {email}=req.body;
@@ -45,7 +46,7 @@ router.route('/Sign-in').post(async(req,res)=>{
             return res.status(400).json({ message: 'Email does not exist,please sign up' });
         if(existingUser.password!=password)
             return res.status(400).json({ message: 'Email or password is wrong!' });
-        const token=jwt.sign({email:req.body.email},'YOUR_SECRET_KEY');
+        const token=jwt.sign({email:req.body.email},process.env.SECRET_KEY);
         const data={
             token:token,
             username:existingUser.name,

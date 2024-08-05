@@ -53,6 +53,7 @@ const Addaccount = ({color}:addaccountprops) => {
           messages:[]
         }
         dispatch(addContact(data2));
+        setemail('');
         return;
       } catch (err:any) {
         if(err.response && err.response.status===400)

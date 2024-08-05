@@ -23,9 +23,9 @@ const userSchema=new mongoose.Schema({
             messages:{
                 type:[
                     {
-                        name:String,
+                        email:String,
                         message:String,
-                        date:Date,
+                        date:String,
                         edited:{
                             type:Boolean,
                             default:false,

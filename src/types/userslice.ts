@@ -21,12 +21,13 @@ const userSlice = createSlice({
       state.imageUrl = action.payload;
     },
     addContact: (state, action: PayloadAction<ContactType>) => {
+      if(!state.contactlist.some(contact => contact.email === action.payload.email)){
       state.contactlist.push({
         ...action.payload,
         imageUrl: action.payload.imageUrl || 'https://via.placeholder.com/50',
         backgroundcolor:action.payload.backgroundcolor||'ffffff',
         messages: [],
-      });
+      });}
     },
     removeContact: (state, action: PayloadAction<string>) => {
       state.contactlist = state.contactlist.filter(contact => contact.email !== action.payload);

@@ -25,7 +25,7 @@ const Navbar = () => {
         <a className={pathname==="/about"?" text-white":"text-black"} href="/about">About</a>
         <a className={pathname==="/contact"?" text-white":"text-black"} href="/contact">Contact</a>
         {
-        token?<div className='logout' onClick={deleteToken}>Logout</div>:  
+        token?<div className='cursor-pointer' onClick={deleteToken}>Logout</div>:  
         <a className={pathname==="/sign-in"?" text-white":"text-black"} href="/sign-in">Login</a>}
         </div>
         

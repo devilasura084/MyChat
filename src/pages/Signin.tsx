@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 import Loading from '../components/Loading';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -8,6 +8,7 @@ import { useAppDispatch } from '../types/hook';
 import { setUserDetails} from '../types/userslice';
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button"
+
 type SigninProps = {
     delay: number;
   };
@@ -21,7 +22,9 @@ const Signin = ({delay}:SigninProps) => {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [showpassword,setshowpassword]=useState(false);
     const [loading, setLoading] = useState(true);
+    
     const dispatch = useAppDispatch();
+    
     if(loading)
     {
       return (<Loading
@@ -69,10 +72,8 @@ const Signin = ({delay}:SigninProps) => {
                     backgroundcolor:backgroundcolor,
                     contactlist:contactlist
                 }
-                console.log(user);
                 dispatch(setUserDetails(user))
                 if(token){
-                    console.log(token);
                     localStorage.setItem('token',token);
                     Navigate('/chat')
                 }

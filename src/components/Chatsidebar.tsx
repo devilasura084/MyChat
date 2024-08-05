@@ -26,11 +26,11 @@ const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {
     <div className='bg-white border h-screen w-1/4 flex flex-col rounded-md '>
       <div style={{backgroundColor:`#${user.backgroundcolor}`}} >
         <div  className='flex items-center ml-4 mt-8'>
-          <div style={{color:color}} className='flex items-center gap-2'>
-          <img className='rounded-full' src={user.imageUrl} alt={`${user.name}'s avatar`} />
-          <div className='text-wrap'>{user.name}</div>
+          <div style={{color:color}} className='flex items-center gap-1'>
+          <img className='rounded-full h-[10svw] w-[10svw]' src={user.imageUrl} alt={`${user.name}'s avatar`} />
+          <div className='text-wrap break-words max-w-[40%]'>{user.name}</div>
           </div>
-          <div className='ml-auto flex gap-2 mr-2'>
+          <div className='ml-auto flex gap-2 '>
           <Addaccount
           color={color}
           />

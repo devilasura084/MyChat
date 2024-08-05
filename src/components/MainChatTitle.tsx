@@ -14,7 +14,6 @@ const MainChatTitle = ({contactname,contactimg,contactcolor}:MainChatTitleprops)
     const newg=g/255;
     const newb=b/255;
     const lum=0.2126*newr+0.7152*newg+0.0722*newb;
-    console.log(lum)
     return lum;
   }
   return (

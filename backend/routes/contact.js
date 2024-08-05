@@ -4,6 +4,7 @@ const router=express.Router();
 router.route('/addaccount').post(async(req,res)=>{
     try {
         const {useremail,receivermail}=req.body;
+        console.log(receivermail)
         const user = await userModel.findOne({ email: useremail });
         const contact = await userModel.findOne({ email:receivermail });
         if (user===null) {

@@ -1,9 +1,9 @@
 
 
 export interface Message {
-  name: string;
+  email: string;
   message: string;
-  date: Date;
+  date: string;
   edited: boolean;
   deleted: boolean;
 }

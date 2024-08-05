@@ -13,17 +13,18 @@ const ContactList = ({setContactdetails,contacts}:contactlistprops) => {
   return (
     <div className="flex flex-col ml-2 mt-4 overflow-auto custom-scrollbar">
         {contacts.map((contact,index)=>(
-            <>
-            <div onClick={()=>handleClick(contact)} className='flex cursor-pointer items-center gap-2' key={index}>
+            <div key={index}>
+            <div onClick={()=>handleClick(contact)} className='flex cursor-pointer items-center gap-2' >
                 
                 <img className="w-14 rounded-full  border-2" src={contact.imageUrl} alt={`${contact.name}'s avatar`}/>
                 <div>{contact.name}</div>
                 <Deleteaccount
                 email={contact.email}
+                setContactdetails={setContactdetails}
                 />
             </div>
             <Separator  />
-            </>
+            </div>
         ))}
     </div>
   )
