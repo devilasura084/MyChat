@@ -25,6 +25,7 @@ const MainChatBar = ({contactemail,socket,setContactdetails}:mainchatbarprops) =
         date: new Date().toISOString(),
         edited: false,
         deleted: false,
+        seen:false
       }
     };
     dispatch(addMessage(messagedata));

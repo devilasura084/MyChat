@@ -44,7 +44,7 @@ const userSlice = createSlice({
     addMessage: (state, action: PayloadAction<{ contactEmail: string; message: Message }>) => {
       const contact = state.contactlist.find(c => c.email === action.payload.contactEmail);
       if (contact) {
-        contact.messages.push(action.payload.message);
+        contact.messages.push({...action.payload.message,seen:false});
       }
     },
     updateMessage: (state, action: PayloadAction<{ contactEmail: string; messageIndex: number; message: Partial<Message> }>) => {
@@ -62,6 +62,14 @@ const userSlice = createSlice({
         contact.messages[action.payload.messageIndex].deleted = true;
       }
     },
+    markMessagesSeen: (state, action: PayloadAction<string>) => {
+      const contact = state.contactlist.find(c => c.email === action.payload);
+      if (contact) {
+        contact.messages.forEach(message => {
+          message.seen = true;
+        });
+      }
+    },
     clearUserDetails: () => initialState,
   },
 });
@@ -75,7 +83,8 @@ export const {
   addMessage,
   updateMessage,
   deleteMessage,
-  clearUserDetails 
+  clearUserDetails,
+  markMessagesSeen
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -7,9 +7,10 @@ import Dotteddropdown from './Dotteddropdown';
 interface ChatsidebarProps {
   contactlist:ContactType[]
   setContactdetails: React.Dispatch<React.SetStateAction<ContactType | undefined>>;
+  contactdetails?:ContactType
 }
 
-const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {
+const Chatsidebar = ({ setContactdetails,contactdetails }:ChatsidebarProps) => {
   const user=useAppSelector(state=>state.user);
   const luminasence=(contactcolor:string)=>{
     let r = parseInt(contactcolor.substring(0, 2), 16);
@@ -21,6 +22,7 @@ const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {
     const lum=0.2126*newr+0.7152*newg+0.0722*newb;
     return lum;
   }
+  
   const color=luminasence(user.backgroundcolor)>0.6?"#000000":"#ffffff";
   return (
     <div className='bg-white border h-screen w-1/4 flex flex-col rounded-md '>
@@ -47,6 +49,7 @@ const Chatsidebar = ({ setContactdetails }:ChatsidebarProps) => {
         <ContactList
         setContactdetails={setContactdetails}
         contacts={user.contactlist}
+        contactdetails={contactdetails}
         />
     </div>
   )

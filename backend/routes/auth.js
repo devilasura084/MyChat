@@ -46,12 +46,22 @@ router.route('/Sign-in').post(async(req,res)=>{
             return res.status(400).json({ message: 'Email does not exist,please sign up' });
         if(existingUser.password!=password)
             return res.status(400).json({ message: 'Email or password is wrong!' });
+        const enhancedContactList = await Promise.all(existingUser.contactlist.map(async (contact) => {
+            const contactDetails = await userModel.findOne({ email: contact.email });
+            return {
+                email:contact.email,
+                name: contactDetails.name,
+                imageUrl: contactDetails.imageUrl,
+                backgroundcolor: contactDetails.backgroundcolor,
+                messages:contact.messages,
+            };
+        }));
         const token=jwt.sign({email:req.body.email},process.env.SECRET_KEY);
         const data={
             token:token,
             username:existingUser.name,
             email:existingUser.email,
-            contactlist:existingUser.contactlist,
+            contactlist:enhancedContactList,
             imageUrl:existingUser.imageUrl,
             backgroundcolor:existingUser.backgroundcolor,
         }

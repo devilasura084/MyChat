@@ -4,7 +4,6 @@ const router=express.Router();
 router.route('/addaccount').post(async(req,res)=>{
     try {
         const {useremail,receivermail}=req.body;
-        console.log(receivermail)
         const user = await userModel.findOne({ email: useremail });
         const contact = await userModel.findOne({ email:receivermail });
         if (user===null) {
@@ -16,10 +15,7 @@ router.route('/addaccount').post(async(req,res)=>{
             return res.status(400).json({ message: "Contact already exists" });
         }
         user.contactlist.push({
-            name:contact.name,
             email:contact.email,
-            imageUrl:contact.imageUrl,
-            backgroundcolor:contact.backgroundcolor,
             messages:[]
         })
         await user.save();
@@ -27,6 +23,35 @@ router.route('/addaccount').post(async(req,res)=>{
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
+    }
+})
+router.route('/getaccounts/:useremail').get(async(req,res)=>{
+    try {
+        const {useremail}=req.params;
+        const user=await userModel.findOne({email:useremail});
+        if(!user)
+            res.status(400).json({message:'user not found'});
+        const enhancedContactList = await Promise.all(user.contactlist.map(async (contact) => {
+            const contactDetails = await userModel.findOne({ email: contact.email });
+            return {
+                email:contact.email,
+                name: contactDetails.name,
+                imageUrl: contactDetails.imageUrl,
+                backgroundcolor: contactDetails.backgroundcolor,
+                messages:contact.messages,
+            };
+        }));
+        const data={
+            username:user.name,
+            email:user.email,
+            contactlist:enhancedContactList,
+            imageUrl:user.imageUrl,
+            backgroundcolor:user.backgroundcolor,
+        }
+        res.json(data);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({message:'server error'})
     }
 })
 router.route('/deleteaccount').post(async(req,res)=>{

@@ -6,6 +6,7 @@ export interface Message {
   date: string;
   edited: boolean;
   deleted: boolean;
+  seen:boolean;
 }
 
 export interface ContactType {

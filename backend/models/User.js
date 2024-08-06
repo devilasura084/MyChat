@@ -10,30 +10,16 @@ const userSchema=new mongoose.Schema({
     backgroundcolor:String,
     contactlist:{
         type:[{
-            name:String,
             email:String,
-            imageUrl:{
-                type:String,
-                default:'https://via.placeholder.com/50'
-            },
-            backgroundcolor:{
-                type:String,
-                default:"ffffff"
-            },
             messages:{
                 type:[
                     {
                         email:String,
                         message:String,
                         date:String,
-                        edited:{
-                            type:Boolean,
-                            default:false,
-                        },
-                        deleted:{
-                            type:Boolean,
-                            default:false
-                        }
+                        edited:Boolean,
+                        deleted:Boolean,
+                        seen:Boolean
                     }
                 ],
                 default:[]

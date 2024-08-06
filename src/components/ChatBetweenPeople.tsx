@@ -11,6 +11,7 @@ const ChatBetweenPeople = ({contactdetails}:ChatBetweenPeoplepeops) => {
     {
         return <div className=' h-[75%] bg-slate-100 p-4 rounded-md'></div>
     }
+    
     const luminasence=(contactcolor:string)=>{
         let r = parseInt(contactcolor.substring(0, 2), 16);
         let g = parseInt(contactcolor.substring(2, 4), 16);
@@ -23,7 +24,7 @@ const ChatBetweenPeople = ({contactdetails}:ChatBetweenPeoplepeops) => {
       }
       useEffect(() => {
         if (chatEndRef.current) {
-            chatEndRef.current.scrollIntoView({ behavior: 'smooth' });
+            chatEndRef.current.scrollIntoView({ behavior: 'instant' });
         }
     }, [contactdetails.messages]);
   return (
@@ -32,12 +33,12 @@ const ChatBetweenPeople = ({contactdetails}:ChatBetweenPeoplepeops) => {
             contactdetails.messages.map((message,index)=>(
                 message.email===user.email?
                 <div className=" w-full p-1 " key={index}>
-                    <div style={{backgroundColor:`#${user.backgroundcolor}`,color:luminasence(user.backgroundcolor)}} className=" w-[40%] ml-auto text-right p-4 rounded-lg text-wrap max-w-96 break-words">
+                    <div style={{backgroundColor:`#${user.backgroundcolor}`,color:luminasence(user.backgroundcolor)}} className="w-fit ml-auto text-right p-4 rounded-lg text-wrap max-w-96 break-words">
                     {message.message}
                     </div>
                     </div>:
                     <div key={index} className=' w-full  p-1'>
-                        <div style={{backgroundColor:`#${contactdetails.backgroundcolor}`,color:luminasence(contactdetails.backgroundcolor)}}  className=" w-[40%] mr-auto text-left p-4 rounded-lg text-wrap max-w-96 break-words">
+                        <div style={{backgroundColor:`#${contactdetails.backgroundcolor}`,color:luminasence(contactdetails.backgroundcolor)}}  className="w-fit mr-auto text-left p-4 rounded-lg text-wrap max-w-96 break-words">
                         {message.message}
                         </div>
                         </div>

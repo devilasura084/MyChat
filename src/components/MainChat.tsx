@@ -1,6 +1,6 @@
 
 
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { ContactType, Message, UserDetailType } from '../types/types';
 import ChatBetweenPeople from './ChatBetweenPeople';
 import MainChatBar from './MainChatBar';
@@ -24,7 +24,7 @@ const MainChat = ({socket,contactdetails,setContactdetails}:mainchatprops) => {
   }
   const dispatch=useDispatch()
   const user=useAppSelector(state=>state.user);
-  const listenerAttached = useRef(false);
+  
   useEffect(() => {
     if (!socket) return;
 
@@ -58,15 +58,11 @@ const MainChat = ({socket,contactdetails,setContactdetails}:mainchatprops) => {
       }
     };
 
-    if (!listenerAttached.current) {
       socket.off(user.email);
       socket.on(user.email, handleNewMessage);
-      listenerAttached.current = true;
-    }
 
     return () => {
       socket.off(user.email, handleNewMessage);
-      listenerAttached.current = false;
     };
   }, [socket, user.email, dispatch, contactdetails, user]);
   return (

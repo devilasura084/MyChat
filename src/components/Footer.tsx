@@ -2,13 +2,13 @@
 
 const Footer = () => {
   return (
-    <>
-    <div className="flex flex-col items-center " >
-        <p className="text-3xl max-w-xl mt-10 ml-10" >
-            Ready to start chatting with your friends and loved one with <span className="text-orange-500">MyChat</span>
+    <div className="mb-10 mt-40">
+    <div className="flex flex-col" >
+        <p className="text-3xl max-w-l m-auto" >
+            Ready to start chatting with your friends and loved ones with <span className="text-orange-500">MyChat</span>
         </p>
-        <a  href="/chat">
-        <button  className="w-44 h-16 bg-orange-500 rounded-lg text-white hover:bg-orange-400 text-l mr-20 mt-5 indent-1 font-semibold transition-all" >
+        <a className="m-auto mt-2"  href="/chat">
+        <button  className="w-44 h-16 bg-orange-500 rounded-lg text-white hover:bg-orange-400 text-l  mt-5 indent-1 font-semibold transition-all" >
               <span>start chatting now {`->`}</span>
             </button>
         </a>
@@ -27,7 +27,7 @@ const Footer = () => {
             </a>
         </div>
     </div>
-    </>
+    </div>
   )
 }
 
