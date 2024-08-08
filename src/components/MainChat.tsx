@@ -19,9 +19,6 @@ interface Messagedataprops{
   senderdata:UserDetailType
 }
 const MainChat = ({socket,contactdetails,setContactdetails}:mainchatprops) => {
-  if (contactdetails === undefined) {
-    return <div className='flex-1 bg-white w-3/4 rounded-md ml-4'><div /></div>;
-  }
   const dispatch=useDispatch()
   const user=useAppSelector(state=>state.user);
   
@@ -29,7 +26,7 @@ const MainChat = ({socket,contactdetails,setContactdetails}:mainchatprops) => {
     if (!socket) return;
 
     const handleNewMessage = (Messagedata: Messagedataprops) => {
-
+      console.log(Messagedata.messageData.message);
       const existingContact = user.contactlist.find(c => c.email === Messagedata.senderdata.email);
       if (!existingContact) {
         const contactdata = {
@@ -66,7 +63,8 @@ const MainChat = ({socket,contactdetails,setContactdetails}:mainchatprops) => {
     };
   }, [socket, user.email, dispatch, contactdetails, user]);
   return (
-    <div className='flex-1 bg-white rounded-r-md ml-4'>
+    <>{contactdetails?
+      <div className='flex-1 bg-white rounded-r-md ml-4'>
       <MainChatTitle
       contactname={contactdetails.name}
       contactimg={contactdetails.imageUrl}
@@ -74,13 +72,18 @@ const MainChat = ({socket,contactdetails,setContactdetails}:mainchatprops) => {
       />
       <ChatBetweenPeople
       contactdetails={contactdetails}
+      socket={socket}
       />
       <MainChatBar
       contactemail={contactdetails.email}
       socket={socket}
       setContactdetails={setContactdetails}
       />
-    </div>
+    </div>:
+    <div className='flex-1 bg-white w-3/4 rounded-md ml-4'><div /></div>
+    }
+    
+    </>
   )
 }
 

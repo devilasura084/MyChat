@@ -9,7 +9,7 @@ const Footer = () => {
         </p>
         <a className="m-auto mt-2"  href="/chat">
         <button  className="w-44 h-16 bg-orange-500 rounded-lg text-white hover:bg-orange-400 text-l  mt-5 indent-1 font-semibold transition-all" >
-              <span>start chatting now {`->`}</span>
+              start chatting now 
             </button>
         </a>
         <div className='flex gap-5 ml-auto mr-10 mt-10'>

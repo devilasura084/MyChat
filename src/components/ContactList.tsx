@@ -15,7 +15,6 @@ const ContactList = ({setContactdetails,contacts,contactdetails}:contactlistprop
         setContactdetails(key);
     }
     const getUnreadCount = (contact: ContactType) => {
-        
         const count= contact.messages.filter(message => !message.seen && message.email !== user.email).length;
         if(count<1)return "";
         return count;

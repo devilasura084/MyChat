@@ -31,7 +31,7 @@ type ProfilePictureProps = {
         "variant06"
     type featuretype="birthmark"|"blush"|"freckles"|"mustache"
     type glassestype="variant01"| "variant02"| "variant03"| "variant04"| "variant05"
-const ProfilePicture = ({delay}:ProfilePictureProps) => {
+    const ProfilePicture = ({delay}:ProfilePictureProps) => {
     const eyebrowsliderVariants:eyebrowvarianttype[] = [
         "variant01", "variant02", "variant03", "variant04", "variant05",
         "variant06", "variant07", "variant08", "variant09", "variant10",

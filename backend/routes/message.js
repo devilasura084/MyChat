@@ -27,7 +27,13 @@ function setupSocket(io) {
 
   io.on('connection', (socket) => {
     console.log(`User connected: ${socket.user.email}`);
-
+    socket.on('delete message',async (msg)=>{
+      try {
+        
+      } catch (error) {
+        
+      }
+    })
     socket.on('chat message', async (msg) => {
       try {
         const sender = await userModel.findOne({ email: msg.sender });

@@ -44,9 +44,17 @@ const MainChatBar = ({contactemail,socket,setContactdetails}:mainchatbarprops) =
       };
     });
   };
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSend();
+    }
+  };
   return (
     <div className="flex w-full gap-2 p-1 items-center h-[10%]">
-      <Input value={message} className="h-full border-2" type="text" placeholder="Type here...." onChange={(e)=>{setmessage(e.target.value)}}/>
+      <Input value={message} className="h-full border-2" type="text" placeholder="Type here...." onChange={(e)=>{setmessage(e.target.value)}}
+      onKeyDown={handleKeyDown}
+      />
       <Button onClick={handleSend} className="h-full" type="submit">Send</Button>
     </div>
   )

@@ -23,7 +23,7 @@ const Home = ({delay}:HomeProps) => {
         </p>
         <a  href="/chat">
         <button className="w-44 h-16 bg-orange-500 rounded-lg text-white hover:bg-orange-400 text-l ml-40 mt-5 indent-1 font-semibold transition-all">
-              <span>start chatting now {`->`}</span>
+              start chatting now
             </button>
         </a>
         <Footer/>

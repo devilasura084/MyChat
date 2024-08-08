@@ -1,8 +1,11 @@
 import { ContactType} from "../types/types"
 import { useAppSelector } from "../types/hook"
 import { useEffect, useRef } from "react";
+// import Deletemessage from "@/services/Deletemessage";
+import { Socket } from "socket.io-client";
 interface ChatBetweenPeoplepeops{
     contactdetails:ContactType
+    socket:Socket|null
 }
 const ChatBetweenPeople = ({contactdetails}:ChatBetweenPeoplepeops) => {
     const user=useAppSelector(state=>state.user);
@@ -11,7 +14,6 @@ const ChatBetweenPeople = ({contactdetails}:ChatBetweenPeoplepeops) => {
     {
         return <div className=' h-[75%] bg-slate-100 p-4 rounded-md'></div>
     }
-    
     const luminasence=(contactcolor:string)=>{
         let r = parseInt(contactcolor.substring(0, 2), 16);
         let g = parseInt(contactcolor.substring(2, 4), 16);
@@ -33,8 +35,13 @@ const ChatBetweenPeople = ({contactdetails}:ChatBetweenPeoplepeops) => {
             contactdetails.messages.map((message,index)=>(
                 message.email===user.email?
                 <div className=" w-full p-1 " key={index}>
-                    <div style={{backgroundColor:`#${user.backgroundcolor}`,color:luminasence(user.backgroundcolor)}} className="w-fit ml-auto text-right p-4 rounded-lg text-wrap max-w-96 break-words">
+                    <div style={{backgroundColor:`#${user.backgroundcolor}`,color:luminasence(user.backgroundcolor)}} className="w-fit ml-auto text-right p-4 rounded-lg text-wrap max-w-96 break-words flex items-center gap-2">
                     {message.message}
+                   {/* <Deletemessage
+                   socket={socket}
+                   index={index}
+                   email={contactdetails.email}
+                   /> */}
                     </div>
                     </div>:
                     <div key={index} className=' w-full  p-1'>
